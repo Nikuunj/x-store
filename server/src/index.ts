@@ -1,37 +1,30 @@
 import express  from 'express';
 import cors from "cors";
 import cookieParser from 'cookie-parser';
-import { admin } from './routes/admin'
-import { user } from './routes/user'
-import { product } from './routes/product'
+import { sellerRouter } from './routes/adminRouter'
+import { userRouter } from './routes/userRouter'
+import { productRouter } from './routes/productRouter'
 import { signout } from './controller/SignoutController'; 
 import mongoose from 'mongoose';
 import { config } from './config/config';
 const app = express();
 const { MONGOOSE_CONNECTION_STRING } = config
+
+app.use(express.json())
 app.use(cookieParser())
 app.use(cors());
 
 app.use('/signout', signout)
-app.use('/admin', admin)
-app.use('/user', user)
-app.use('/product', product)
+app.use('/seller', sellerRouter)
+app.use('/user', userRouter)
+app.use('/product', productRouter)
 
 async function main() {
-    mongoose
-        .connect(MONGOOSE_CONNECTION_STRING)
-        .then(() => {
-            console.log("✅ Connected to MongoDB");
-        })
-        .catch((err) => {
-            console.error("❌ MongoDB Connection Error:", err);
-        });
-    console.log(config)
+    mongoose.connect(MONGOOSE_CONNECTION_STRING)
     console.log('database connected');
     
     app.listen(3000, () => {
-        console.log('PORT 3000')
+        console.log('lisining on port 3000')
     })
 }
-
 main();
