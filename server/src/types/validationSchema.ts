@@ -9,9 +9,9 @@ export const userSchema = z.object({
 });
 
 export const productSchema = z.object({
-    title: z.string().min(1, { message: "Name cannot be empty" }),
-    description: z.string().email({ message: "Invalid email format" }),
-    price: z.string().min(5, { message: "Your pass is too short " }),
+    title: z.string().min(10, { message: "Name cannot be empty" }),
+    description: z.string().min(50),
+    price: z.number().min(2, { message: "Your pass is too short " }),
     imageLink: z.string().min(5, { message: "It not url" }).url(),
 });
 

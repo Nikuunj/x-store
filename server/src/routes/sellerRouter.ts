@@ -1,13 +1,14 @@
 import { Request, Response, Router } from "express";
-import { userSchema, userSellerSignIn } from '../types/validationSchema'
+import { userSchema, userSellerSignIn, productSchema } from '../types/validationSchema'
 import bcrypt from 'bcrypt'
-import { sellerModel } from "../db/db";
+import { sellerModel, productModel } from "../db/db";
 import { config } from "../config/config";
 import jwt from 'jsonwebtoken'
 import { sellerMiddleware } from "../middleware/sellerMiddleware";
 
 export const sellerRouter = Router();
 const { ADMIN_JWT_SECRET } = config
+
 sellerRouter.get('/', (req: Request, res: Response) => {
     res.send('hello from sellerRouter')
 })
@@ -96,18 +97,100 @@ sellerRouter.post('/signin',async (req: Request, res: Response) => {
     }
 })
 
-sellerRouter.post('/product', sellerMiddleware, (req: Request, res: Response) => {
-    res.send('hello from sellerRouter')
+sellerRouter.post('/product', sellerMiddleware, async (req: Request, res: Response) => {
+
+    const validaton = productSchema.safeParse(req.body);
+
+    if(!validaton.success) {
+        if(!validaton.success) {
+            res.status(400).json({
+                message: "Incorrect data format",
+                error: validaton.error,
+            });
+            return
+        }
+    }
+
+    const sellerId = req.userId;
+    const { title, description, price, imageLink } = req.body
+
+    try {
+        await productModel.create({
+            title,
+            description,
+            price,
+            imageLink,
+            sellerId
+        })
+
+        res.status(200).json({
+            msg : 'product added'
+        })
+        return
+    } catch(e) {
+        res.status(401).json({
+            msg : 'seller id not valid'
+        })
+        return
+    }
+    
 })
 
-sellerRouter.delete('/product', sellerMiddleware, (req: Request, res: Response) => {
-    res.send('hello from sellerRouter')
+sellerRouter.delete('/:productId', sellerMiddleware, async (req: Request, res: Response) => {
+    const productId = req.params.productId;
+
+    try {
+        await productModel.deleteOne({
+            _id: productId
+        })
+        res.json({
+            msg : 'product drop'
+        })
+    } catch (e) {
+        res.status(409).json({
+            msg: 'cant delete product'
+        })
+    }
 })
 
-sellerRouter.get('/product', sellerMiddleware, (req: Request, res: Response) => {
-    res.send('hello from sellerRouter')
+sellerRouter.get('/product', sellerMiddleware, async (req: Request, res: Response) => {
+    const sellerId = req.userId;
+    const owenProduct = await productModel.find({
+        sellerId
+    })
+
+    res.json({
+        owenProduct
+    })
 })
 
-sellerRouter.put('/product', sellerMiddleware, (req: Request, res: Response) => {
-    res.send('hello from sellerRouter')
+sellerRouter.put('/:productId', sellerMiddleware, async (req: Request, res: Response) => {
+    // validation
+    const validaton = productSchema.safeParse(req.body);
+
+    if(!validaton.success) {
+        if(!validaton.success) {
+            res.status(400).json({
+                message: "Incorrect data format",
+                error: validaton.error,
+            });
+            return
+        }
+    }
+    const productId = req.params.productId;
+    const { title, description, price, imageLink } = req.body;
+
+    try {
+        await productModel.findOneAndUpdate({
+            _id: productId
+        }, { $set: { title, description, price, imageLink } } )
+        res.json({
+            msg : 'product updated'
+        })
+    } catch(e) {
+        res.status(409).json({
+            msg: 'product not found'
+        })
+    }
+    
 })
