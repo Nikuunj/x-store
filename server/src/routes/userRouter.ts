@@ -1,5 +1,5 @@
 import {  Request, Response, Router } from "express";
-import { userModel, puchaseModel } from '../db/db'
+import { userModel, purchaseModel } from '../db/db'
 import { userSchema, userSellerSignIn } from "../types/validationSchema";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -90,14 +90,49 @@ userRouter.post('/signin', async (req: Request, res: Response) => {
     }
 })
 
-userRouter.post('/purchase', userMiddleware, (req: Request, res: Response) => {
-    res.send('hello from userRouter')
+userRouter.post('/purchase/:productId', userMiddleware, async (req: Request, res: Response) => {
+    const userId = req.userId;
+    const productId = req.params.productId;
+
+    try {
+        await purchaseModel.create({
+            userId,
+            productId
+        })
+        res.json({
+            msg: 'product purchased'
+        })
+    } catch(e) {
+        res.status(402).json({
+            msg: 'you cant purchase product'
+        })
+    }
 })
 
-userRouter.get('/purchase', userMiddleware, (req: Request, res: Response) => {
-    res.send('hello from userRouter')
+userRouter.get('/purchase', userMiddleware, async (req: Request, res: Response) => {
+    const userId = req.userId;
+    const owenProduct = await purchaseModel.find({
+        userId
+    })
+
+    res.json({
+        owenProduct
+    })
 })
 
-userRouter.delete('/purchase', userMiddleware, (req: Request, res: Response) => {
-    res.send('hello from userRouter')
+userRouter.delete('/purchase/:purchaseId', userMiddleware, async (req: Request, res: Response) => {
+    const purchaseId = req.params.purchaseId;
+    const deletededRow  = await purchaseModel.deleteOne({
+        _id: purchaseId
+    })
+    if(deletededRow.deletedCount) {
+        res.json({
+            msg: 'delete purchase'
+        })
+        return
+    }
+    res.status(409).json({
+        msg: "can't delete product"
+    })
+    return
 })

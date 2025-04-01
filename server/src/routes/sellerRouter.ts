@@ -1,3 +1,5 @@
+// all thing tested all are in working stage
+
 import { Request, Response, Router } from "express";
 import { userSchema, userSellerSignIn, productSchema } from '../types/validationSchema'
 import bcrypt from 'bcrypt'
@@ -97,6 +99,17 @@ sellerRouter.post('/signin',async (req: Request, res: Response) => {
     }
 })
 
+sellerRouter.get('/product', sellerMiddleware, async (req: Request, res: Response) => {
+    const sellerId = req.userId;
+    const owenProduct = await productModel.find({
+        sellerId
+    })
+
+    res.json({
+        owenProduct
+    })
+})
+
 sellerRouter.post('/product', sellerMiddleware, async (req: Request, res: Response) => {
 
     const validaton = productSchema.safeParse(req.body);
@@ -139,30 +152,21 @@ sellerRouter.post('/product', sellerMiddleware, async (req: Request, res: Respon
 sellerRouter.delete('/:productId', sellerMiddleware, async (req: Request, res: Response) => {
     const productId = req.params.productId;
 
-    try {
-        await productModel.deleteOne({
-            _id: productId
-        })
+    const deletededRow =  await productModel.deleteOne({
+        _id: productId
+    })
+    if(deletededRow.deletedCount) {
         res.json({
-            msg : 'product drop'
+            msg: 'deleted product'
         })
-    } catch (e) {
-        res.status(409).json({
-            msg: 'cant delete product'
-        })
+        return
     }
+    res.status(409).json({
+        msg: "can't delete product"
+    })
+    return
 })
 
-sellerRouter.get('/product', sellerMiddleware, async (req: Request, res: Response) => {
-    const sellerId = req.userId;
-    const owenProduct = await productModel.find({
-        sellerId
-    })
-
-    res.json({
-        owenProduct
-    })
-})
 
 sellerRouter.put('/:productId', sellerMiddleware, async (req: Request, res: Response) => {
     // validation

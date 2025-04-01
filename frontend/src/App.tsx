@@ -11,8 +11,7 @@ function App() {
   return (
     <>
     <RecoilRoot>
-     <Render elementID={0}/>
-      <Render elementID={1}/>
+      <Render elementID={0} key={0}/>
     </RecoilRoot>
     </>
   )
@@ -20,8 +19,10 @@ function App() {
 
 function Render({ elementID }) {
   return <>
+  <br />
     <ElementList elementID={elementID}/>
     <Btn elementID={elementID}/>
+    <br />
    </>
 }
 function ElementList({ elementID }) {

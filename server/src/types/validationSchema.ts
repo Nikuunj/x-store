@@ -15,13 +15,12 @@ export const productSchema = z.object({
     imageLink: z.string().min(5, { message: "It not url" }).url(),
 });
 
-
-export interface userSellerType extends z.infer<typeof userSchema> {
-}
-
 export const userSellerSignIn = userSchema.pick({ email: true, password: true });
 
 export type userSellerSignInType = z.infer<typeof userSellerSignIn >
+
+export interface userSellerType extends z.infer<typeof userSchema> {
+}
 
 export interface productType extends z.infer<typeof productSchema> {
     sellerId:mongoose.Types.ObjectId;
@@ -30,4 +29,6 @@ export interface productType extends z.infer<typeof productSchema> {
 export interface Puchase {
     userId:mongoose.Types.ObjectId;
     productId: mongoose.Types.ObjectId;
+    status: string;
+    where: string;
 }
