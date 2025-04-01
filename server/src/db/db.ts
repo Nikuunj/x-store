@@ -7,7 +7,6 @@ const UserSeller = new Schema<userSellerType>({
     name: String,
     email: String,
     password: String,
-    salt: String
 })
 
 const Product = new Schema<productType>({

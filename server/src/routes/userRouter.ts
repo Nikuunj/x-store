@@ -1,12 +1,16 @@
 import {  Request, Response, Router } from "express";
 import { userModel, puchaseModel } from '../db/db'
-import { userSchema } from "../types/validationSchema";
+import { userSchema, userSellerSignIn } from "../types/validationSchema";
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import { config } from '../config/config'
+const { USER_JWT_SECRET } = config;
 
 export const userRouter = Router();
 
 userRouter.post('/signup', async (req: Request, res: Response) => {
     
+    // validation
     const validaton = userSchema.safeParse(req.body);
     
     if(!validaton.success) {
@@ -18,13 +22,11 @@ userRouter.post('/signup', async (req: Request, res: Response) => {
     }
     const { name, email, password }  = req.body;
     try {
-        const salt = await bcrypt.genSalt(10);
-        const hashedPass = await bcrypt.hash(password, salt);
+        const hashedPass = await bcrypt.hash(password, 10);
         await userModel.create({
             name,
             email,
-            password,
-            salt
+            password: hashedPass
         })
         res.json({
             msg: 'seller id created'
@@ -38,8 +40,53 @@ userRouter.post('/signup', async (req: Request, res: Response) => {
     }
 })
 
-userRouter.post('/signin', (req: Request, res: Response) => {
-    res.send('hello from userRouter')
+userRouter.post('/signin', async (req: Request, res: Response) => {
+
+    // validation
+    const validaton = userSellerSignIn.safeParse(req.body);
+    if(!validaton.success) {
+        res.status(400).json({
+            message: "Incorrect data format",
+            error: validaton.error,
+        });
+        return
+    }
+    const { email, password }  = req.body;
+
+    const user = await userModel.findOne({
+        email
+    })
+
+
+    if (!user) {
+        res.status(403).json({
+            message: "User not found!",
+        });
+        return
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+        const token = jwt.sign( {id :user._id.toString()}, USER_JWT_SECRET, {
+            expiresIn: "7d", // Token valid for 7 days
+        })
+        res.cookie('token', `Bearer ${token}`, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000, 
+        })
+        res.status(200).json({
+            token
+        });
+        return
+    } else {
+        res.status(403).json({
+            message: "Wrong password!",
+        });
+        return
+    }
 })
 
 userRouter.post('/purchase', (req: Request, res: Response) => {

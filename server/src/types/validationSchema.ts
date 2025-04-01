@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { ExitStatus } from 'typescript';
 import z from 'zod'
 
 export const userSchema = z.object({
@@ -14,9 +15,13 @@ export const productSchema = z.object({
     imageLink: z.string().min(5, { message: "It not url" }).url(),
 });
 
+
 export interface userSellerType extends z.infer<typeof userSchema> {
-    salt: string
 }
+
+export const userSellerSignIn = userSchema.pick({ email: true, password: true });
+
+export type userSellerSignInType = z.infer<typeof userSellerSignIn >
 
 export interface productType extends z.infer<typeof productSchema> {
     sellerId:mongoose.Types.ObjectId;

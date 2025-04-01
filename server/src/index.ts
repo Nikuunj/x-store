@@ -1,7 +1,7 @@
 import express  from 'express';
 import cors from "cors";
 import cookieParser from 'cookie-parser';
-import { sellerRouter } from './routes/adminRouter'
+import { sellerRouter } from './routes/sellerRouter'
 import { userRouter } from './routes/userRouter'
 import { productRouter } from './routes/productRouter'
 import { signout } from './controller/SignoutController'; 
