@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt'
 import { sellerModel } from "../db/db";
 import { config } from "../config/config";
 import jwt from 'jsonwebtoken'
+import { sellerMiddleware } from "../middleware/sellerMiddleware";
 
 export const sellerRouter = Router();
 const { ADMIN_JWT_SECRET } = config
@@ -31,7 +32,7 @@ sellerRouter.post('/signup', async (req: Request, res: Response) => {
         await sellerModel.create({
             name,
             email,
-            password,
+            password: hashedPass,
             salt
         })
         res.json({
@@ -40,7 +41,7 @@ sellerRouter.post('/signup', async (req: Request, res: Response) => {
         return
     } catch(e) {
         res.status(500).json({
-            msg: 'somthing went wrong in seller roouter /signup'
+            msg: 'somthing went wrong in seller roouter ya duplicate email in db /seller/signup'
         })
         return
     }
@@ -95,18 +96,18 @@ sellerRouter.post('/signin',async (req: Request, res: Response) => {
     }
 })
 
-sellerRouter.post('/product', (req: Request, res: Response) => {
+sellerRouter.post('/product', sellerMiddleware, (req: Request, res: Response) => {
     res.send('hello from sellerRouter')
 })
 
-sellerRouter.delete('/product', (req: Request, res: Response) => {
+sellerRouter.delete('/product', sellerMiddleware, (req: Request, res: Response) => {
     res.send('hello from sellerRouter')
 })
 
-sellerRouter.get('/product', (req: Request, res: Response) => {
+sellerRouter.get('/product', sellerMiddleware, (req: Request, res: Response) => {
     res.send('hello from sellerRouter')
 })
 
-sellerRouter.put('/product', (req: Request, res: Response) => {
+sellerRouter.put('/product', sellerMiddleware, (req: Request, res: Response) => {
     res.send('hello from sellerRouter')
 })

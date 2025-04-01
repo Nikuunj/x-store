@@ -4,6 +4,7 @@ import { userSchema, userSellerSignIn } from "../types/validationSchema";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { config } from '../config/config'
+import { userMiddleware } from "../middleware/userMiddleware";
 const { USER_JWT_SECRET } = config;
 
 export const userRouter = Router();
@@ -89,18 +90,14 @@ userRouter.post('/signin', async (req: Request, res: Response) => {
     }
 })
 
-userRouter.post('/purchase', (req: Request, res: Response) => {
+userRouter.post('/purchase', userMiddleware, (req: Request, res: Response) => {
     res.send('hello from userRouter')
 })
 
-userRouter.get('/purchased', (req: Request, res: Response) => {
+userRouter.get('/purchase', userMiddleware, (req: Request, res: Response) => {
     res.send('hello from userRouter')
 })
 
-userRouter.get('/', (req: Request, res: Response) => {
-    res.send('hello from userRouter')
-})
-
-userRouter.put('/', (req: Request, res: Response) => {
+userRouter.delete('/purchase', userMiddleware, (req: Request, res: Response) => {
     res.send('hello from userRouter')
 })

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const UserSeller = new Schema<userSellerType>({
     name: String,
-    email: String,
+    email: { type : String, unique: true },
     password: String,
 })
 
