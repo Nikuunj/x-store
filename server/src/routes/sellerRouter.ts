@@ -3,10 +3,11 @@
 import { Request, Response, Router } from "express";
 import { userSchema, userSellerSignIn, productSchema } from '../types/validationSchema'
 import bcrypt from 'bcrypt'
-import { sellerModel, productModel } from "../db/db";
+import { sellerModel, productModel, purchaseModel } from "../db/db";
 import { config } from "../config/config";
 import jwt from 'jsonwebtoken'
 import { sellerMiddleware } from "../middleware/sellerMiddleware";
+import { Types } from "mongoose";
 
 export const sellerRouter = Router();
 const { ADMIN_JWT_SECRET } = config
@@ -50,7 +51,7 @@ sellerRouter.post('/signup', async (req: Request, res: Response) => {
     }
 })
 
-sellerRouter.post('/signin',async (req: Request, res: Response) => {
+sellerRouter.post('/signin', async (req: Request, res: Response) => {
 
     // validation
     const validaton = userSellerSignIn.safeParse(req.body);
@@ -101,13 +102,21 @@ sellerRouter.post('/signin',async (req: Request, res: Response) => {
 
 sellerRouter.get('/product', sellerMiddleware, async (req: Request, res: Response) => {
     const sellerId = req.userId;
-    const owenProduct = await productModel.find({
-        sellerId
-    })
 
-    res.json({
-        owenProduct
-    })
+    try {
+        const owenProduct = await productModel.find({
+            sellerId
+        })
+    
+        res.json({
+            owenProduct
+        })
+        return
+    } catch(e) {
+        res.status(500).json({
+            msg: 'internal server error'
+        })
+    }
 })
 
 sellerRouter.post('/product', sellerMiddleware, async (req: Request, res: Response) => {
@@ -151,22 +160,24 @@ sellerRouter.post('/product', sellerMiddleware, async (req: Request, res: Respon
 
 sellerRouter.delete('/:productId', sellerMiddleware, async (req: Request, res: Response) => {
     const productId = req.params.productId;
+        
+    try {
+        const result = await productModel.deleteOne({ _id: productId });
 
-    const deletededRow =  await productModel.deleteOne({
-        _id: productId
-    })
-    if(deletededRow.deletedCount) {
-        res.json({
-            msg: 'deleted product'
-        })
+        if (result.deletedCount === 0) {
+            res.status(404).json({
+                msg: "product not found or already deleted"
+            });
+            return
+        }
+
+        res.json({ msg: "product deleted successfully" });
+        return
+    } catch (e) {
+        res.status(500).json({ msg: "Error deleting product" });
         return
     }
-    res.status(409).json({
-        msg: "can't delete product"
-    })
-    return
 })
-
 
 sellerRouter.put('/:productId', sellerMiddleware, async (req: Request, res: Response) => {
     // validation
@@ -185,16 +196,69 @@ sellerRouter.put('/:productId', sellerMiddleware, async (req: Request, res: Resp
     const { title, description, price, imageLink } = req.body;
 
     try {
-        await productModel.findOneAndUpdate({
+        const updatedProduct = await productModel.findOneAndUpdate({
             _id: productId
         }, { $set: { title, description, price, imageLink } } )
-        res.json({
-            msg : 'product updated'
-        })
+        if (!updatedProduct) {
+            res.status(404).json({ msg: 'product not found' });
+            return
+        }
+        res.json({ msg: 'product updated' });
+        return
     } catch(e) {
-        res.status(409).json({
-            msg: 'product not found'
-        })
+        res.status(500).json({ msg: 'Internal server error' });
+        return
     }
+})
+
+// get all own product order which place by user
+sellerRouter.get('/purchase', sellerMiddleware, async (req: Request, res: Response) => {
+
+    const sellerId = new Types.ObjectId(req.userId);
+
+    const innterJoin = await productModel.aggregate([
+        {
+            $match: { sellerId : sellerId }
+        },
+        {
+            $lookup: {
+                from: 'purchases',
+                localField: '_id',
+                foreignField: 'productId',
+                as: 'purchasedProduct'
+            }
+        },
+        {
+            $match: { "purchasedProduct.0": { $exists: true } }
+        }
+    ])
+    res.json({
+        innterJoin
+    })
+})
+
+// status update
+sellerRouter.put('/purchase/:purchaseId', sellerMiddleware, async (req: Request, res: Response) => {
+    const purchaseId = req.params.purchaseId;
+
+    const status = 'recived';
+
+    try {
+        const updatedPurchase = await purchaseModel.findOneAndUpdate(
+            { _id: purchaseId },
+            { $set: { status } },
+        );
     
+        if (!updatedPurchase) {
+            res.status(404).json({ msg: 'Purchase not found' }); 
+            return
+        }
+    
+        res.json({ msg: 'Purchase updated', purchase: updatedPurchase });
+        return
+    
+    } catch(e) {
+        res.status(500).json({ msg: 'Internal server error' }); 
+        return
+    }
 })

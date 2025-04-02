@@ -1,3 +1,4 @@
+// tested complete working
 import {  Request, Response, Router } from "express";
 import { userModel, purchaseModel } from '../db/db'
 import { userSchema, userSellerSignIn } from "../types/validationSchema";
@@ -122,17 +123,22 @@ userRouter.get('/purchase', userMiddleware, async (req: Request, res: Response) 
 
 userRouter.delete('/purchase/:purchaseId', userMiddleware, async (req: Request, res: Response) => {
     const purchaseId = req.params.purchaseId;
-    const deletededRow  = await purchaseModel.deleteOne({
-        _id: purchaseId
-    })
-    if(deletededRow.deletedCount) {
-        res.json({
-            msg: 'delete purchase'
-        })
+    
+    try {
+        const result = await purchaseModel.deleteOne({ _id: purchaseId });
+
+        if (result.deletedCount === 0) {
+            res.status(404).json({
+                msg: "Purchase not found or already deleted"
+            });
+            return
+        }
+
+        res.json({ msg: "Purchase deleted successfully" });
+        return
+    } catch (e) {
+        res.status(500).json({ msg: "Error deleting purchase" });
         return
     }
-    res.status(409).json({
-        msg: "can't delete product"
-    })
-    return
+
 })

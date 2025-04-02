@@ -27,4 +27,4 @@ const Purchase = new Schema<Puchase>({
 export const sellerModel = mongoose.model('seller', UserSeller);
 export const userModel = mongoose.model('user', UserSeller);
 export const productModel = mongoose.model('product', Product);
-export const purchaseModel = mongoose.model('purchase', Purchase);
+export const purchaseModel = mongoose.model('purchases', Purchase);
