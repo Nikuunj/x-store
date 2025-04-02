@@ -1,15 +1,29 @@
 import {  Request, Response, Router } from "express";
-// import { config } from '../config/config';
 import { productModel } from '../db/db'
+
 export const productRouter = Router();
 
-
 // send all item
-productRouter.get('/', (req: Request, res: Response) => {
-    res.send('hello from productRouter')
-})
+productRouter.get('/:skip', async (req: Request, res: Response) => {
 
+    const skip = parseInt(req.params.skip);
+    try {
+        const productAll = await productModel.find({}).skip(skip).limit(2)
+        if(!productAll) {
+            res.status(404).json({
+                msg : 'no any product find'
+            })
+            return
+        }
 
-productRouter.get('/:productId', (req: Request, res: Response) => {
-    res.send('hello from productRouter')
+        res.json({
+            productAll
+        })
+        return
+    } catch(e) {
+        res.json({
+            msg : 'internal server error'
+        })
+        return
+    }
 })
