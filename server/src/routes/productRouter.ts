@@ -8,7 +8,7 @@ productRouter.get('/:skip', async (req: Request, res: Response) => {
 
     const skip = parseInt(req.params.skip);
     try {
-        const productAll = await productModel.find({}).skip(skip).limit(2)
+        const productAll = await productModel.find({}).skip(skip).limit(2).populate('sellerId', 'name')
         if(!productAll) {
             res.status(404).json({
                 msg : 'no any product find'
