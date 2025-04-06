@@ -14,10 +14,10 @@ function TextBlock({ variant, text, onClick } : TextBlockProps) {
         detail: 'outline-1 outline-indigo-600 hover:bg-indigo-900  cursor-pointer'
     }
 
-    const defaultStyle: string = 'px-2 py-1 transition-all duration-300';
+    const defaultStyle: string = 'px-2 transition-all duration-300 py-0.5 lg:py-1';
 
     return (
-        <div className={`${styleVariant[variant]} ${defaultStyle}`}  
+        <div className={`${styleVariant[variant]} ${defaultStyle} `}  
         onClick={onClick}
         >
             {text}

@@ -3,5 +3,5 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --shadow-3xl: 7px 12px 35px
+    --shadow-3xl: 7px 12px 35px;
 }
