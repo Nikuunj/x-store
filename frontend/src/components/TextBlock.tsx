@@ -15,7 +15,7 @@ function TextBlock({ variant, text, onClick } : TextBlockProps) {
     }
 
     const defaultStyle: string = 'px-2 transition-all duration-300 py-0.5 lg:py-1';
-
+    
     return (
         <div className={`${styleVariant[variant]} ${defaultStyle} `}  
         onClick={onClick}

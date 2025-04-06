@@ -1,21 +1,19 @@
 import { atom, selector, selectorFamily } from 'recoil'
 
-// Atom to store the full list of users
-export const userListState = atom<any[]>({
-  key: 'userListState',
-  default: [],
-})
-
-// Selector that you can manually trigger to fetch and set the atom
-export const fetchAndSetUserListSelector = selector<any[]>({
-  key: 'fetchAndSetUserListSelector',
-  get: () => [], // dummy return
-  set: async ({ set }, _newValue) => {
+// Selector to fetch the user list
+const userListDefaultSelector = selector<any[]>({
+  key: 'userListState/Default',
+  get: async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/users');
     if (!res.ok) throw new Error('Failed to fetch users');
-    const data = await res.json();
-    set(userListState, data); // ✅ This is valid
+    return await res.json();
   },
+});
+
+// Atom that uses the selector as its default
+export const userListState = atom<any[]>({
+  key: 'userListState',
+  default: userListDefaultSelector,
 });
 
 export const userIdListSelector = selector<number[]>({

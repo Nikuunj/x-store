@@ -13,7 +13,7 @@ function ProductDetail({ id } : { id: string }) {
     }
     return (
         <>
-            {open && <div className="absolute inset-0 h-screen w-screen bg-zinc-950 opacity-60  flex items-center justify-center z-50"
+            {open && <div className="absolute inset-0 h-screen w-screen bg-[#050505cc] flex items-center justify-center z-50"
                         onClick={handleClose}>
                     <div className="bg-white text-black p-4 rounded-lg shadow-lg" onClick={(e) => e.stopPropagation()}>
                         <div>

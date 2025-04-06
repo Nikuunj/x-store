@@ -3,5 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+    --cursor-default: url(/cursor_1.png) 15 15 , default;
+    --cursor-pointer: url(/pointer_1.png) , pointer;
     --shadow-3xl: 7px 12px 35px;
 }
