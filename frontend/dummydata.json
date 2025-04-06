@@ -1,0 +1,10 @@
+[
+    {
+        "id": "1" ,
+        "tile" : "1 product",
+        "price": 6999,
+        "description": "1 descripton",
+        "imageLink": "src/assets/t-shirt.png",
+        "sellerName": "1 Seller"
+    }
+]
