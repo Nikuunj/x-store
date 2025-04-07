@@ -2,11 +2,13 @@
 type VariantType = "default" | "sell" | "detail" 
 export interface TextBlockProps {
     variant: VariantType;
+    size: "sm" | "md" | "lg";
+    textSize: "sm" | "md" | "lg";
     text: string | number;
     onClick?: () => void;
 }
 
-function TextBlock({ variant, text, onClick } : TextBlockProps) {
+function TextBlock({ variant, size, textSize, text, onClick } : TextBlockProps) {
 
     const styleVariant = {
         default: 'hover:bg-amber-500 hover:text-zinc-700',
@@ -14,10 +16,23 @@ function TextBlock({ variant, text, onClick } : TextBlockProps) {
         detail: 'outline-1 outline-indigo-600 hover:bg-indigo-900  cursor-pointer'
     }
 
-    const defaultStyle: string = 'px-2 transition-all duration-300 py-0.5 lg:py-1';
+    const boxSizeStyle = {
+        sm: "py-0.5 lg:py-1",
+        md: "py-2",
+        lg: "py-4",
+    }
+
+
+    const textSizeStyle = {
+        sm: 'text-sm',
+        md: 'text-md',
+        lg: 'text-xl',
+    }
+
+    const defaultStyle: string = 'transition-all duration-300 px-4 ';
     
     return (
-        <div className={`${styleVariant[variant]} ${defaultStyle} `}  
+        <div className={`${styleVariant[variant]} ${defaultStyle} ${boxSizeStyle[size]} ${textSizeStyle[textSize]}`}  
         onClick={onClick}
         >
             {text}
