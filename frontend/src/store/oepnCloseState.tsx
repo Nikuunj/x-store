@@ -9,3 +9,8 @@ export const submitAtom = atom<boolean>({
     key: 'submitAtom',
     default: false,
 })
+
+export const navBarAtom = atom<boolean>({
+    key: 'navBarAtom',
+    default: false,
+})
