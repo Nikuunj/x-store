@@ -1,0 +1,69 @@
+<svg width="100%" height="200%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class='bg-transparent'>
+  <defs>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#4338ca" flood-opacity="1"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="0.5" flood-color="#4338ca" flood-opacity="1"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#glow)">
+    <!-- More and smaller stars -->
+    <circle r="0.2" fill="#4338ca">
+      <animateTransform attributeName="transform" type="translate" from="5 5" to="120 120" dur="10s" begin="0s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="0s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="0.2" fill="#4338ca">
+      <animateTransform from="15 8" to="130 115" dur="10s" begin="0.5s" repeatCount="indefinite" attributeName="transform" type="translate"/>
+      <animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="0.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="0.2" fill="#4338ca">
+      <animateTransform from="10 2" to="120 100" dur="10s" begin="1s" repeatCount="indefinite" attributeName="transform" type="translate"/>
+      <animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="1s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="0.2" fill="#4338ca">
+      <animateTransform from="20 12" to="130 122" dur="10s" begin="1.5s" repeatCount="indefinite" attributeName="transform" type="translate"/>
+      <animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="0.2" fill="#4338ca">
+      <animateTransform from="2 14" to="110 124" dur="10s" begin="2s" repeatCount="indefinite" attributeName="transform" type="translate"/>
+      <animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="0.2" fill="#4338ca">
+      <animateTransform from="8 6" to="115 116" dur="10s" begin="2.5s" repeatCount="indefinite" attributeName="transform" type="translate"/>
+      <animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="0.2" fill="#4338ca">
+      <animateTransform from="6 10" to="112 120" dur="10s" begin="3s" repeatCount="indefinite" attributeName="transform" type="translate"/>
+      <animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="0.2" fill="#4338ca">
+      <animateTransform from="18 3" to="128 110" dur="10s" begin="3.5s" repeatCount="indefinite" attributeName="transform" type="translate"/>
+      <animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="0.2" fill="#4338ca">
+      <animateTransform from="1 9" to="100 119" dur="10s" begin="4s" repeatCount="indefinite" attributeName="transform" type="translate"/>
+      <animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="0.2" fill="#4338ca">
+      <animateTransform from="14 7" to="124 117" dur="10s" begin="4.5s" repeatCount="indefinite" attributeName="transform" type="translate"/>
+      <animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="4.5s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- 15 more stars -->
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="9 4" to="115 114" dur="10s" begin="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="5s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="11 1" to="121 101" dur="10s" begin="5.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="5.2s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="3 13" to="103 123" dur="10s" begin="5.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="5.4s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="7 8" to="107 118" dur="10s" begin="5.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="5.6s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="13 2" to="123 102" dur="10s" begin="5.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="5.8s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="4 11" to="104 121" dur="10s" begin="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="6s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="16 6" to="126 116" dur="10s" begin="6.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="6.2s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="12 15" to="122 125" dur="10s" begin="6.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="6.4s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="6 7" to="106 117" dur="10s" begin="6.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="6.6s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="17 4" to="127 114" dur="10s" begin="6.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="6.8s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="19 9" to="129 119" dur="10s" begin="7s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="7s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="5 12" to="115 122" dur="10s" begin="7.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="7.2s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="0 0" to="100 100" dur="10s" begin="7.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="7.4s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="2 6" to="102 116" dur="10s" begin="7.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="7.6s" repeatCount="indefinite"/></circle>
+    <circle r="0.2" fill="#4338ca"><animateTransform attributeName="transform" type="translate" from="3 7" to="103 117" dur="10s" begin="7.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" dur="10s" begin="7.8s" repeatCount="indefinite"/></circle>
+  </g>
+</svg>
