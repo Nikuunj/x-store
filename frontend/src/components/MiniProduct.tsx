@@ -2,7 +2,7 @@
 import { useSetRecoilState } from 'recoil'
 import TextBlock, { TextBlockProps } from './TextBlock'
 import { elementOpenStateFamily } from '../store/oepnCloseState'
-import { MiniProductProps } from '../types/productType'
+// import { MiniProductProps } from '../types/productType'
 import React from 'react'
 
 
