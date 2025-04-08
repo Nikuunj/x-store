@@ -1,16 +1,14 @@
 import { atom, selector, selectorFamily } from 'recoil'
 
-// Selector to fetch the user list
 const productListDefaultSelector = selector<any[]>({
   key: 'productListState/Default',
   get: async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/users');
-    if (!res.ok) throw new Error('Failed to fetch users');
+    if (!res.ok) throw new Error('Failed to fetch products');
     return await res.json();
   },
 });
 
-// Atom that uses the selector as its default
 export const productListState = atom<any[]>({
   key: 'productListState',
   default: productListDefaultSelector,
@@ -19,18 +17,17 @@ export const productListState = atom<any[]>({
 export const productIdListSelector = selector<number[]>({
   key: 'productIdListSelector',
   get: ({ get }) => {
-    const users = get(productListState);
-    return users.map((user: any) => user.id);
+    const products = get(productListState);
+    return products.map((user: any) => user.id);
   },
 });
 
-// SelectorFamily to get a specific user by ID from productListState
-export const productSelectorFamily = selectorFamily({
+export const productSelectorFamily = selectorFamily<any | null, string>({
   key: 'productSelectorFamily',
   get:
-    (userId: number) =>
+    (productId: string) =>
     ({ get }) => {
-      const users = get(productListState)
-      return users.find((user: any) => user.id === userId) || null
+      const products = get(productListState)
+      return products.find((user: any) => user.id == productId) || null
     },
 })

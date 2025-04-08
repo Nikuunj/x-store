@@ -6,17 +6,17 @@ import { sellerOrderSelectorFamily } from "../store/fetchOrderSeller";
 function SellerSingleOrderDetail({ id }: { id: string }) {
     const [open, setOpen] = useRecoilState(sellerOrderOpenAtomFamily(id));
     const data = useRecoilValueLoadable(sellerOrderSelectorFamily(id));
-        const handleClose = () => {
-            setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+    }
+
+    if (data.state === 'loading') {
+        return <>Loading...</>;
         }
     
-        if (data.state === 'loading') {
-            return <>Loading...</>;
-          }
-        
-          if (data.state === 'hasError') {
-            return <>Error</>;
-          }
+        if (data.state === 'hasError') {
+        return <>Error</>;
+        }
     return (
         <>
             {open && <div className={"absolute inset-0 h-screen w-screen bg-[#050505cc] flex items-center justify-center z-50"}
