@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil"
-import { elementOpenStateFamily } from "../store/oepnCloseState";
+import { productOpenStateFamily } from "../store/oepnCloseState";
 // import { ProductDetailProps } from "../types/productType";
 import React from "react";
 import BigImage from "./BigImage";
@@ -8,7 +8,7 @@ import BigImage from "./BigImage";
 function ProductDetail({ id } : { id: string }) {
     
 
-    const [open, setOpen] = useRecoilState(elementOpenStateFamily(id));
+    const [open, setOpen] = useRecoilState(productOpenStateFamily(id));
     const handleClose = () => {
         setOpen(false);
     }

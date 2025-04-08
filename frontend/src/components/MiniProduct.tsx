@@ -1,13 +1,12 @@
 
 import { useSetRecoilState } from 'recoil'
 import TextBlock, { TextBlockProps } from './TextBlock'
-import { elementOpenStateFamily } from '../store/oepnCloseState'
-// import { MiniProductProps } from '../types/productType'
+import { productOpenStateFamily } from '../store/oepnCloseState'
 import React from 'react'
 
 
 function MiniProduct({ id } : { id: string }) {
-    const setOpen = useSetRecoilState(elementOpenStateFamily(id))
+    const setOpen = useSetRecoilState(productOpenStateFamily(id))
     const DetailsCollection: TextBlockProps[] = [{
             variant: 'default',
             text: 'Product Title',

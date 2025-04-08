@@ -1,10 +1,10 @@
 import { useRecoilValueLoadable } from "recoil";
 import MiniProduct from "../components/MiniProduct";
 import ProductDetail from "../components/ProductDetail";
-import { userIdListSelector } from "../store/fetchProduct";
+import { productIdListSelector } from "../store/fetchProduct";
 
 function Product() {
-  const val = useRecoilValueLoadable(userIdListSelector);
+  const val = useRecoilValueLoadable(productIdListSelector);
 
   if (val.state === 'loading') {
     return <>Loading...</>;
