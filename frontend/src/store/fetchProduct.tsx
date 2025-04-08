@@ -1,8 +1,8 @@
 import { atom, selector, selectorFamily } from 'recoil'
 
 // Selector to fetch the user list
-const userListDefaultSelector = selector<any[]>({
-  key: 'userListState/Default',
+const productListDefaultSelector = selector<any[]>({
+  key: 'productListState/Default',
   get: async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/users');
     if (!res.ok) throw new Error('Failed to fetch users');
@@ -11,26 +11,26 @@ const userListDefaultSelector = selector<any[]>({
 });
 
 // Atom that uses the selector as its default
-export const userListState = atom<any[]>({
-  key: 'userListState',
-  default: userListDefaultSelector,
+export const productListState = atom<any[]>({
+  key: 'productListState',
+  default: productListDefaultSelector,
 });
 
-export const userIdListSelector = selector<number[]>({
-  key: 'userIdListSelector',
+export const productIdListSelector = selector<number[]>({
+  key: 'productIdListSelector',
   get: ({ get }) => {
-    const users = get(userListState);
+    const users = get(productListState);
     return users.map((user: any) => user.id);
   },
 });
 
-// SelectorFamily to get a specific user by ID from userListState
-export const userSelectorFamily = selectorFamily({
-  key: 'userSelectorFamily',
+// SelectorFamily to get a specific user by ID from productListState
+export const productSelectorFamily = selectorFamily({
+  key: 'productSelectorFamily',
   get:
     (userId: number) =>
     ({ get }) => {
-      const users = get(userListState)
+      const users = get(productListState)
       return users.find((user: any) => user.id === userId) || null
     },
 })
