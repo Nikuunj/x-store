@@ -8,5 +8,6 @@
     --cursor-text: url(/text_1.png) , text;
     --shadow-3xl: 7px 12px 35px;
     --shadow-lg: 4px 4px 15px;
-    --inset-shadow-sm: inset 0px 0px 70px
+    --inset-shadow-sm: inset 0px 0px 70px;
+    --inset-shadow-xs: inset 0px 0px 8px;
 }
