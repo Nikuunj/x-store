@@ -26,12 +26,11 @@ function Product() {
     ));
 
     return (
-      <div className="grid grid-cols-12 md:px-24 sm:gap-10 gap-y-6 py-2 lg:mx-0">
+      <div className="grid grid-cols-12 md:px-24 sm:gap-x-10 sm:gap-y-12 gap-y-10 py-2 lg:mx-0">
         {renderProduct}
       </div>
     );
 
-//   return null;
 }
 
 export default Product;
