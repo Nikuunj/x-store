@@ -52,8 +52,8 @@ function SignIn() {
     ))
 
   return (
-    <div className={"h-screen grid grid-cols-10"}>
-        <div className={"flex flex-col justify-center items-center gap-5 col-span-12 md:col-span-5"} >
+    <div className={"h-screen -translate-y-12 grid grid-cols-10"}>
+        <div className={"flex flex-col justify-center items-center gap-5 col-span-12 md:col-span-6"}>
             <div className={"flex flex-col gap-5"}>
                 {render}
             </div>

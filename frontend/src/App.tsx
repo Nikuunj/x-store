@@ -26,7 +26,7 @@ function App() {
                   <Route path="product" element={<Product />}/>
                   <Route path="purchase/:productId" element={<PlaceOrder />} />
                   <Route path="user/purchases" element={<UserViewOrder />} />
-                  { localStorage.getItem('auth') === 'seller' && <Route path="seller/purchases" element={<SellerViewOrder />} />}
+                  <Route path="seller/purchases" element={<SellerViewOrder />} />
                   <Route path="*" element={<ErrorPage />} />
               </Route>
             </Routes>
