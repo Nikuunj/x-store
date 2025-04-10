@@ -3,6 +3,7 @@ import { useSetRecoilState } from 'recoil'
 import TextBlock, { TextBlockProps } from './TextBlock'
 import { productOpenStateFamily } from '../store/oepnCloseState'
 import React from 'react'
+import { Link } from 'react-router'
 
 
 function MiniProduct({ id } : { id: string }) {
@@ -41,7 +42,9 @@ function MiniProduct({ id } : { id: string }) {
                     <div className="lg:pl-2 pb-2 lg:pb-0 flex flex-col  gap-1">
                         {DetailRender}
                         <TextBlock variant={"detail"} size={'sm'} textSize={'md'} text={'More Details'} onClick={handleOpen} />
-                        <TextBlock variant={"sell"} size={'sm'} text={'Buy'} textSize={'md'}/>
+                        <Link to={`../purchase/${id}`}>
+                            <TextBlock variant={"sell"} size={'sm'} text={'Buy'} textSize={'md'}/>
+                        </Link>
                     </div>
         </div>
     )

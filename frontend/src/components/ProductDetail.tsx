@@ -24,7 +24,7 @@ function ProductDetail({ id } : { id: string }) {
         }
     return (
         <>
-            {open && <div className={"absolute inset-0 h-screen w-screen md:px-60 bg-[#050505cc] flex items-center justify-center z-50"}
+            {open && <div className={"fixed inset-0   md:px-60 bg-[#050505cc] flex items-center justify-center z-50"}
                         onClick={handleClose}>
                     <div className={"bg-zinc-900  p-10 gap-4 min-w-72 flex-col flex rounded-lg text-zinc-400"} onClick={(e) => e.stopPropagation()}>
                         <div className="flex justify-center">

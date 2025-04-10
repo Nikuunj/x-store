@@ -10,7 +10,7 @@ function NavComponent() {
     }
     return (
         <>
-            <div className={`md:flex gap-3 transition-all duration-300 bg-zinc-500/30 md:bg-transparent  md:relative md:w-auto md:-translate-0 ${open ? 'w-full absolute translate-y-21' : ' -translate-y-21 w-full absolute' }`} >
+            <div className={`md:flex gap-3 transition-all duration-300 bg-zinc-800/40 md:bg-transparent  md:relative md:w-auto md:-translate-0 ${open ? 'w-full absolute translate-y-21' : ' -translate-y-21 w-full absolute' }`} >
                 <div className="ps-4 py-0.5 ">
                     Home
                 </div>

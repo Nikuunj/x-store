@@ -20,7 +20,7 @@ function UserSingleOrderDetail({ id }: { id: string }) {
 
     return (
         <>
-            {open && <div className={"absolute inset-0 h-screen w-screen bg-[#050505cc] flex items-center justify-center z-50"}
+            {open && <div className={" fixed h-screen inset-0 bg-[#050505cc] flex items-center justify-center z-50"}
                         onClick={handleClose}>
                      <div className={"bg-zinc-900  p-10 gap-4 flex-col flex rounded-lg text-zinc-400"} onClick={(e) => e.stopPropagation()}>
                         Do You Want to Confim Your Order ?
