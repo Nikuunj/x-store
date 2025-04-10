@@ -6,20 +6,29 @@
     import { useSetRecoilState } from "recoil";
     import { submitAtom } from "../store/oepnCloseState";
     import SubmitChecker from "../components/SubmitChecker";
-    // import { useParams } from 'react-router'
+    import { useNavigate, useParams } from 'react-router'
+import { purchaseOrderFormUser } from "../util/submitForm";
 
     function PlaceOrder() {
-        
+        const navigate = useNavigate();
+        const param = useParams();
         const ref = useRef<any>(Array(placeOrderInputRef.length).fill(0));
         const setOpen = useSetRecoilState(submitAtom)
 
         function handleOpen() {
             setOpen(true)
         }
-        function submitFrom() {
+        async function submitFrom() {
             setOpen(false)
             const arr = ref.current.map((input: any) => input?.value);
-            console.log(arr)
+            const deliveyAddress = arr.join(' ');
+            const productId = param.productId
+            // @ts-ignore
+            const response =  await purchaseOrderFormUser({ deliveyAddress, productId})
+            if(response?.status === 401) {
+                navigate('../../signin')
+            }
+            console.log(response);
         }
 
         const render = placeOrderInputRef.map((val, index) => (

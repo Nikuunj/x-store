@@ -26,7 +26,7 @@ function UserViewOrder() {
     ));
 
     return (
-    <div className={'px-10 mt-2 flex flex-col gap-2 sm:gap-3'}
+    <div className={'px-2 sm:px-10 flex flex-col gap-2 sm:gap-3'}
     >
       {renderProduct}
     </div>

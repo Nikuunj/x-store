@@ -25,7 +25,7 @@ function SellerViewOrder() {
     ));
 
     return (
-    <div className={'px-10 mt-2 flex flex-col gap-2 sm:gap-3'}
+    <div className={'sm:px-10 px-2 flex flex-col gap-2 sm:gap-3'}
     >
         {renderProduct}
     </div>
