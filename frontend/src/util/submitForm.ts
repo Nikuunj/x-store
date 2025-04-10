@@ -1,22 +1,24 @@
 import axios, { AxiosResponse } from "axios";
 
-const BACKEDN_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 
-interface SubmitFromType {
+interface SignupFromType {
     name:string;
     email:string;
     password: string
 }
 
+type SignInFromType = Pick<SignupFromType, 'email' | 'password'>
 interface PurchaseOrederType {
     productId: string;
     deliveyAddress: string;
 }
-export async function signUpSubmitFormUser({ name, email , password }: SubmitFromType): Promise<AxiosResponse<any> | undefined> {
+
+export async function signUpSubmitFormUser({ name, email , password }: SignupFromType): Promise<AxiosResponse<any> | undefined> {
 
     try {
-        const response = await axios.post(`${BACKEDN_URL}/user/signup`, {
+        const response = await axios.post(`${BACKEND_URL}/user/signup`, {
             name,
             email,
             password  
@@ -30,10 +32,9 @@ export async function signUpSubmitFormUser({ name, email , password }: SubmitFro
     }
 }
 
-export async function signInSubmitFormUser({ name, email , password }: SubmitFromType): Promise<AxiosResponse<any> | undefined> {
-
+export async function signUpSubmitFormSeller({ name, email , password }: SignupFromType): Promise<AxiosResponse<any> | undefined> {
     try {
-        const response = await axios.post(`${BACKEDN_URL}/user/signin`, {
+        const response = await axios.post(`${BACKEND_URL}/seller/signup`, {
             name,
             email,
             password  
@@ -46,10 +47,10 @@ export async function signInSubmitFormUser({ name, email , password }: SubmitFro
     }
 }
 
+export async function signInSubmitFormUser({ email , password }: SignInFromType): Promise<AxiosResponse<any> | undefined> {
 
-export async function signUpSubmitFormSeller({ name, email , password }: SubmitFromType): Promise<AxiosResponse<any> | undefined> {
     try {
-        const response = await axios.post(`${BACKEDN_URL}/seller/signup`, {
+        const response = await axios.post(`${BACKEND_URL}/user/signin`, {
             name,
             email,
             password  
@@ -61,10 +62,9 @@ export async function signUpSubmitFormSeller({ name, email , password }: SubmitF
         }
     }
 }
-
-export async function signInSubmitFormSeller({ name, email , password }: SubmitFromType): Promise<AxiosResponse<any> | undefined> {
+export async function signInSubmitFormSeller({ email , password }: SignInFromType): Promise<AxiosResponse<any> | undefined> {
     try {
-        const response = await axios.post(`${BACKEDN_URL}/seller/signin`, {
+        const response = await axios.post(`${BACKEND_URL}/seller/signin`, {
             name,
             email,
             password  
@@ -76,11 +76,10 @@ export async function signInSubmitFormSeller({ name, email , password }: SubmitF
         }
     }
 }
-
 
 export async function purchaseOrderFormUser({ deliveyAddress, productId }: PurchaseOrederType): Promise<AxiosResponse<any> | undefined> {
     try {
-        const response = await axios.post(`${BACKEDN_URL}/user/product/${productId}`, {
+        const response = await axios.post(`${BACKEND_URL}/user/product/${productId}`, {
             deliveyAddress
         })
         return response
@@ -90,3 +89,30 @@ export async function purchaseOrderFormUser({ deliveyAddress, productId }: Purch
         }
     }
 }
+
+export async function signOutFunction(): Promise<boolean> {
+    try {
+        await axios.get(`${BACKEND_URL}/signout`)
+        return true
+    } catch(e) {
+        return false
+    }
+}
+
+export async function singInWithToken(auther:string): Promise<boolean> {
+    try {
+        await axios.get(`${BACKEND_URL}/${auther}`)
+        return true
+    } catch(e) {
+        return false
+    }
+}
+
+
+export const fetchProductsBySkip = async (skip: number): Promise<any[]> => {
+    const res = await fetch(`${BACKEND_URL}/product/${skip}`);
+    if (!res.ok) throw new Error('Failed to fetch products');
+    const data = await res.json();
+    return data.productAll;
+  };
+  
