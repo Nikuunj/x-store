@@ -10,6 +10,11 @@ export const submitAtom = atom<boolean>({
     default: false,
 })
 
+export const signOutState = atom<boolean>({
+    key: 'signOutState',
+    default: false,
+})
+
 export const navBarAtom = atom<boolean>({
     key: 'navBarAtom',
     default: false,

@@ -1,3 +1,4 @@
+import { memo } from "react"
 
 function LandingPage() {
   return (
@@ -5,4 +6,4 @@ function LandingPage() {
   )
 }
 
-export default LandingPage
+export default memo(LandingPage)

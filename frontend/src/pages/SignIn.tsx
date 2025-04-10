@@ -1,29 +1,44 @@
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import InputBox from "../components/InputBox";
 import TextBlock from "../components/TextBlock";
 import ToggleButtonComponent from "../components/ToggleButton";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { toggleAtom } from "../store/toggleButton";
 import { signInSubmitFormSeller, signInSubmitFormUser } from "../util/submitForm";
+import { userNameState } from "../store/userInfo";
 
 
 function SignIn() {
     const ref = useRef<any>(Array(2).fill(0));
     const toggleData = useRecoilValue(toggleAtom);
-
+    const setUserName = useSetRecoilState(userNameState);
 
     async function sellerSubmitForm() {
         const arr = ref.current.map((input: any) => input?.value);
-        console.log('seller')
-        const status = await signInSubmitFormSeller({ name: arr[0] , email: arr[1] , password: arr[0] })
-        console.log(status);
+        
+        // const response = await signInSubmitFormSeller({ name: arr[0] , email: arr[1] , password: arr[0] })
+        // if(response?.status === 400) {
+
+        console.log('click');
+        
+        // } else {
+            localStorage.setItem('auther', 'seller')
+            localStorage.setItem('autherName', 'sellerName')
+            setUserName('sellerName')
+        // }
     }
 
     async function userSubmitForm() {
-        const arr = ref.current.map((input: any) => input?.value);
-        console.log('user')
-        const status = await signInSubmitFormUser({ name: arr[0] , email: arr[1] , password: arr[0] })
-        console.log(status);
+        // const arr = ref.current.map((input: any) => input?.value);
+        // const response = await signInSubmitFormUser({ name: arr[0] , email: arr[1] , password: arr[0] })
+        // if(response?.status === 400) {
+            console.log('click');
+        
+        // } else {
+            localStorage.setItem('auther', 'user')
+            localStorage.setItem('autherName', 'userName')
+            setUserName('userName')
+        // }
     }
 
     // @ts-ignore
@@ -57,4 +72,4 @@ function SignIn() {
   )
 }
 
-export default SignIn
+export default memo(SignIn)
