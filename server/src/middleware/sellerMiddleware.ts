@@ -18,6 +18,22 @@ export const sellerMiddleware = (req: Request, res: Response, next: NextFunction
         }
 }
 
-module.exports = {
-    sellerMiddleware
+export const loginWithToken = async (req: Request, res: Response) => {
+    
+    
+
+    const tokenArr =  req.cookies.token
+    try {
+        const token = tokenArr.split(" ")[1];
+        const verify = jwt.verify(token, ADMIN_JWT_SECRET) as JwtPayload;
+        req.userId = verify.id;
+        res.status(200).json({
+            message: "you token is valid"
+        })
+    } catch(e) {
+        res.clearCookie('token');
+        res.status(401).json({
+            msg: 'your token not valid'
+        })
+    }
 }

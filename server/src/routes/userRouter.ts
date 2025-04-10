@@ -1,9 +1,11 @@
 // tested complete working
 import { Router } from "express";
-import { userMiddleware } from "../middleware/userMiddleware";
+import { loginWithToken, userMiddleware } from "../middleware/userMiddleware";
 import UserController from "../controller/UserController";
 
 export const userRouter = Router();
+
+userRouter.get('/', loginWithToken);
 
 userRouter.post('/signup', UserController.userSignUp)
 

@@ -90,11 +90,13 @@ const userSignIn =  async (req: Request, res: Response) => {
 const userProductPurchase = async (req: Request, res: Response) => {
     const userId = req.userId;
     const productId = req.params.productId;
+    const deliveyAddress = req.body.deliveyAddress;
 
     try {
         await purchaseModel.create({
             userId,
-            productId
+            productId,
+            deliveyAddress
         })
         res.json({
             msg: 'product purchased'

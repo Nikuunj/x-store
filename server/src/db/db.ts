@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { userSellerType, productType, Puchase } from "../types/validationSchema";
+import { string } from "zod";
 
 const Schema = mongoose.Schema;
 
@@ -20,6 +21,7 @@ const Product = new Schema<productType>({
 const Purchase = new Schema<Puchase>({
     userId: { type: Schema.Types.ObjectId, ref: "user", required: true },
     productId: { type: Schema.Types.ObjectId, ref: "product", required: true },
+    deliveryAddress: { type: String , require: true },
     status: { type: String, default: "Order Placed" },
     where: { type: String, default: "Update Soon" }
 })

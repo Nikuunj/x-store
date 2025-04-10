@@ -29,6 +29,7 @@ export interface productType extends z.infer<typeof productSchema> {
 export interface Puchase {
     userId:mongoose.Types.ObjectId;
     productId: mongoose.Types.ObjectId;
+    deliveryAddress: string;
     status: string;
     where: string;
 }

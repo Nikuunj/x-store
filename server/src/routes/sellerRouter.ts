@@ -1,14 +1,12 @@
 // all thing tested all are in working stage
 
 import { Request, Response, Router } from "express";
-import { sellerMiddleware } from "../middleware/sellerMiddleware";
+import { loginWithToken, sellerMiddleware } from "../middleware/sellerMiddleware";
 import SellerController from "../controller/SellerController";
 
 export const sellerRouter = Router();
 
-sellerRouter.get('/', (req: Request, res: Response) => {
-    res.send('hello from sellerRouter')
-})
+sellerRouter.get('/', loginWithToken);
 
 
 sellerRouter.post('/signup', SellerController.sellerSignUp)
