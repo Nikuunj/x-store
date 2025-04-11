@@ -1,9 +1,14 @@
 import { atom, atomFamily } from "recoil";
 
 export const productOpenStateFamily = atomFamily<boolean, string>({
-    key: 'ElementPosition',
+    key: 'productOpenStateFamily',
     default: false,
 });
+
+export const showDetailState = atom<boolean>({
+    key: 'showDetailState',
+    default: false
+})
 
 export const submitAtom = atom<boolean>({
     key: 'submitAtom',

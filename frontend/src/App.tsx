@@ -1,5 +1,4 @@
 import { RecoilRoot } from "recoil"
-import { Suspense } from "react"
 import SignUp from "./pages/SignUp"
 import SignIn from "./pages/SignIn"
 import { BrowserRouter, Routes, Route } from 'react-router'
@@ -15,9 +14,7 @@ import SellerViewOrder from "./pages/SellerViewOrder"
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>🌀 Loading...</div>}>
           <RecoilRoot>
-         
             <Routes>
               <Route path="/" element={<Layout />}>
                   <Route index element={<LandingPage />} />
@@ -30,9 +27,7 @@ function App() {
                   <Route path="*" element={<ErrorPage />} />
               </Route>
             </Routes>
-
           </RecoilRoot>
-      </Suspense>
     </BrowserRouter>
   )
 }

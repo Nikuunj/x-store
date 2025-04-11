@@ -10,7 +10,7 @@ import { productSelectorFamily } from '../store/fetchProduct'
 function MiniProduct({ id } : { id: string }) {
     const setOpen = useSetRecoilState(productOpenStateFamily(id))
     const data = useRecoilValueLoadable(productSelectorFamily(id));
-    console.log(data.contents)
+
 
 
     if (data.state === 'loading') {
