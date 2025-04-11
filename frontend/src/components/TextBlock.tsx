@@ -31,10 +31,10 @@ function TextBlock({ variant, size, textSize, text, onClick } : TextBlockProps) 
         lg: 'text-xl',
     }
 
-    const defaultStyle: string = 'transition-all duration-300 ';
+    const defaultStyle: string = 'transition-all overflow-hidden text-ellipsis duration-300';
     
     return (
-        <div className={`${styleVariant[variant]} ${defaultStyle} ${boxSizeStyle[size]}  ${textSizeStyle[textSize]}`}  
+        <div className={`${styleVariant[variant]}  ${defaultStyle} ${boxSizeStyle[size]}  ${textSizeStyle[textSize]}`}  
         onClick={onClick}
         >
             {text}

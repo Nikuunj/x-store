@@ -1,30 +1,46 @@
 
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValueLoadable, useSetRecoilState } from 'recoil'
 import TextBlock, { TextBlockProps } from './TextBlock'
 import { productOpenStateFamily } from '../store/oepnCloseState'
 import React from 'react'
 import { Link } from 'react-router'
+import { productSelectorFamily } from '../store/fetchProduct'
 
 
 function MiniProduct({ id } : { id: string }) {
     const setOpen = useSetRecoilState(productOpenStateFamily(id))
-    const DetailsCollection: TextBlockProps[] = [{
+    const data = useRecoilValueLoadable(productSelectorFamily(id));
+    console.log(data.contents)
+
+
+    if (data.state === 'loading') {
+        return <>Loading...</>;
+   }
+   
+   if (data.state === 'hasError') {
+    return <>Error</>;
+   }
+
+
+    
+    const DetailsCollection: TextBlockProps[] = [
+        {
             variant: 'default',
-            text: 'Product Title',
+            text: data.contents.title,
             size: 'sm',
             textSize: 'md'
         },
         {
             variant: 'default',
-            text: 6999,
+            text: data.contents.price,
             size: 'sm',
-            textSize: 'md'
+            textSize: 'sm'
         },
         {
             variant: 'default',
-            text: '!00x',
+            text: 'Seller: ' + data.contents.sellerId.name,
             size: 'sm',
-            textSize: 'md'
+            textSize: 'sm'
         }
     ]
 
@@ -40,10 +56,12 @@ function MiniProduct({ id } : { id: string }) {
                         <img className="h-60 min-w-40 rounded-md lg:rounded-s-lg" src={'/t-shirt.png'} alt={'image'} />  
                     </div> 
                     <div className="lg:pl-2 pb-2 lg:pb-0 flex flex-col  gap-1">
-                        {DetailRender}
-                        <TextBlock variant={"detail"} size={'sm'} textSize={'md'} text={'More Details'} onClick={handleOpen} />
+                        <div className='max-w-[150px] flex flex-col gap-1 text-ellipsis'>
+                            {DetailRender}
+                        </div>
+                        <TextBlock variant={"detail"} size={'sm'} textSize={'sm'} text={'More Details'} onClick={handleOpen} />
                         <Link to={`../purchase/${id}`}>
-                            <TextBlock variant={"sell"} size={'sm'} text={'Buy'} textSize={'md'}/>
+                            <TextBlock variant={"sell"} size={'sm'} text={'Buy'} textSize={'sm'}/>
                         </Link>
                     </div>
         </div>
