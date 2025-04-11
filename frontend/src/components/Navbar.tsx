@@ -6,6 +6,7 @@ import { userNameState } from "../store/userInfo"
 import { memo } from "react"
 import { Link, useNavigate } from 'react-router'
 import { signOutState } from "../store/oepnCloseState"
+import { signOutFunction } from "../util/submitForm"
 
 function Navbar() {
 
@@ -55,12 +56,15 @@ const UserName = ({userName} : { userName: string} ) => {
     console.log(open)
   }
   
-  function signOutHandle() {
-    localStorage.removeItem('auther')
-    localStorage.removeItem('autherName')
-    setOpen(false)
-    setUserName('');
-    navigate('');
+  async function signOutHandle() {
+    const singnOut =  await signOutFunction();
+    if(singnOut) {
+      localStorage.removeItem('auther')
+      localStorage.removeItem('autherName')
+      setOpen(false)
+      setUserName('');
+      navigate('');
+    }
   }
   return (
   <>
