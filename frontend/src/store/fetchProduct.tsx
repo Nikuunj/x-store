@@ -1,12 +1,20 @@
 import { atom, selector, selectorFamily } from 'recoil'
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const productListDefaultSelector = selector<any[]>({
   key: 'productListState/Default',
   get: async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
+    const res = await fetch(`${BACKEND_URL}/product/0`);
     if (!res.ok) throw new Error('Failed to fetch products');
-    return await res.json();
+    const data = await res.json(); // call this ONLY ONCE
+    console.log(data); // Optional: for debugging
+    return data.productAll
   },
+});
+
+export const productSkipState  = atom<number>({
+  key: 'productSkipState',
+  default: 0,
 });
 
 export const productListState = atom<any[]>({
@@ -18,7 +26,7 @@ export const productIdListSelector = selector<number[]>({
   key: 'productIdListSelector',
   get: ({ get }) => {
     const products = get(productListState);
-    return products.map((user: any) => user.id);
+    return products.map((products: any) => products._id);
   },
 });
 
@@ -28,6 +36,6 @@ export const productSelectorFamily = selectorFamily<any | null, string>({
     (productId: string) =>
     ({ get }) => {
       const products = get(productListState)
-      return products.find((user: any) => user.id == productId) || null
+      return products.find((product: any) => product._id == productId) || null
     },
 })

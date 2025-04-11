@@ -1,10 +1,10 @@
 import { atom, selector, selectorFamily } from "recoil";
-
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const userPurchaseListDefaultSelector = selector<any[]>({
     key: 'userPurchaseListDefaultSelector/Default',
     get: async () => {
-        const res = await fetch('https://jsonplaceholder.typicode.com/users');
+        const res = await fetch(`${BACKEND_URL}/user/product`);
         if (!res.ok) throw new Error('Failed to fetch orders');
         return await res.json();
     },
