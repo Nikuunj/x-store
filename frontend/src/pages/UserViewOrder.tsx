@@ -2,17 +2,19 @@ import { useRecoilValueLoadable } from "recoil";
 import { userPurchaseIdListSelector } from "../store/fetchUserPurchase";
 import UserSingleOrder from "../components/UserSingleOrder";
 import UserSingleOrderDetail from "../components/UserSingleOrderDetail";
+import { useNavigate } from "react-router";
 
 
 function UserViewOrder() {
   const val = useRecoilValueLoadable(userPurchaseIdListSelector);
+  const navigate = useNavigate();
   
     if (val.state === 'loading') {
       return <>Loading...</>;
     }
   
     if (val.state === 'hasError') {
-      return <>Error</>;
+      navigate('../../signin')
     }
   
     const renderProduct = val.contents.map((id: number | string) => (
