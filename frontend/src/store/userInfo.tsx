@@ -1,9 +1,20 @@
 import { atom, selector } from "recoil";
+import { singInWithToken } from "../util/submitForm";
+
 
 const userNameDefaultSelector = selector<string>({
   key: 'userNameDefaultSelector',
-  get: () => {
-    return localStorage.getItem('autherName') || '';
+  get: async () => {
+    const auther = localStorage.getItem('auther');
+    if(auther) {
+      const isValid = await singInWithToken(auther);
+      if(!isValid) {
+        localStorage.removeItem('autherName');
+        localStorage.removeItem('auther');
+        return '';
+      }
+    }
+    return localStorage.getItem('autherName');
   },
 });
     

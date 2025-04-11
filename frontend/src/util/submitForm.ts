@@ -107,12 +107,3 @@ export async function singInWithToken(auther:string): Promise<boolean> {
         return false
     }
 }
-
-
-export const fetchProductsBySkip = async (skip: number): Promise<any[]> => {
-    const res = await fetch(`${BACKEND_URL}/product/${skip}`);
-    if (!res.ok) throw new Error('Failed to fetch products');
-    const data = await res.json();
-    return data.productAll;
-  };
-  
