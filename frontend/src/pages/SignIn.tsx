@@ -7,10 +7,11 @@ import { toggleAtom } from "../store/toggleButton";
 import { signInSubmitFormSeller, signInSubmitFormUser } from "../util/submitForm";
 import { userNameState } from "../store/userInfo";
 import { useNavigate } from "react-router";
+import { signInInputRef } from "../util/util";
 
 
 function SignIn() {
-    const ref = useRef<any>(Array(2).fill(0));
+    const ref = useRef<any>(Array(signInInputRef.length).fill(0));
     const toggleData = useRecoilValue(toggleAtom);
     const setUserName = useSetRecoilState(userNameState);
     const navigate = useNavigate();
@@ -48,12 +49,12 @@ function SignIn() {
         }
     }
 
-    // @ts-ignore
-    const render = Array(2).fill(1).map((val, index) => (
+    const render = signInInputRef.map((val, index) => (
         <div className={''}>
             <InputBox refrence={(e) => ref.current[index] = e} key={index}
-            typeOfIn={'text'}
-            placeHolder={"placeHolder"}
+            // @ts-ignore
+            typeOfIn={val.types}
+            placeHolder={val.placeHolder}
             />
         </div>
     ))
@@ -73,7 +74,7 @@ function SignIn() {
             </div>
         </div>
         <div className={"col-span-3 hidden md:flex items-center justify-center"}>
-            <img className={"min-w-40 w-96"} src={'src/assets/image-2.png'} alt={'img'} />  
+            <img className={"min-w-40 w-96"} src={'assets/image-2.png'} alt={'img'} />  
         </div>
     </div>
   )

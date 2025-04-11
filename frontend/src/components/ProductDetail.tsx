@@ -17,7 +17,6 @@ function ProductDetail({ id }: { id: string }) {
     if (data.state === 'hasError') return <>Error</>;
 
     const { title, description, price, sellerId } = data.contents;
-    console.log(description)
 
     return (
         <>

@@ -20,20 +20,28 @@ function PlaceOrder() {
     }
     async function submitFrom() {
         setOpen(false)
-        const arr = ref.current.map((input: any) => input?.value);
+        const arr = ref.current.map((input: any) => input?.value?.trim()).filter(Boolean)
         const deliveyAddress = arr.join(' ');
         const productId = param.productId
-        // @ts-ignore
-        const response =  await purchaseOrderFormUser({ deliveyAddress, productId})
-        if(response?.status === 401) {
-            navigate('../../signin')
+
+        if(!deliveyAddress) {
+            alert('Plz add address')
+            return
+        } else {
+            if(!productId) {
+                navigate('../../product')
+                return
+            }
+            const response =  await purchaseOrderFormUser({ deliveyAddress, productId })
+            if(response?.status === 401) {
+                navigate('../../signin')
+            }
         }
-        console.log(response);
     }
 
     const render = placeOrderInputRef.map((val, index) => (
-        <div className={'col-span-12 md:col-span-6'}>
-            <InputBox refrence={(e) => ref.current[index] = e} key={index}
+        <div key={index} className={'col-span-12 md:col-span-6'}>
+            <InputBox refrence={(e) => ref.current[index] = e} 
             // @ts-ignore
             typeOfIn={val.types}
             placeHolder={val.placeHolder}

@@ -38,10 +38,55 @@ export const LinkNav = [
     }, 
     {
         name: 'Add Product',
-        to: 'seller/purchases'
-    }, 
+        to: 'seller/addproduct'
+    },
     {
         name: 'View Product',
         to: 'seller/purchases'
     }, 
+]
+
+export const signInInputRef = [
+    {
+        types: "email",
+        placeHolder: 'email',
+    },
+    {
+        types: "password",
+        placeHolder: 'password',
+    },
+]
+
+export const signUpInputRef = [
+    {
+        types: "text",
+        placeHolder: 'name',
+    },
+    {
+        types: "email",
+        placeHolder: 'email',
+    },
+    {
+        types: "password",
+        placeHolder: 'password',
+    },
+]
+
+export const addProductInputRef = [
+    {
+        types: "text",
+        placeHolder: 'product name',
+    },
+    {
+        types: "number",
+        placeHolder: 'price',
+    },
+    {
+        types: "text",
+        placeHolder: 'description',
+    },
+    {
+        types: "text",
+        placeHolder: 'image link',
+    },
 ]

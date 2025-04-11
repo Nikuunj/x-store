@@ -11,7 +11,7 @@ function InputBox({ refrence, placeHolder, typeOfIn }: InputBoxProps) {
      invalid:outline-1 invalid:outline-rose-800 bg-gray-800/65 invalid:shadow-lg
       invalid:shadow-rose-800 shadow-lg shadow-indigo-800 
       focus:shadow-emerald-800 transition-all duration-500
-       text-gray-400 px-4 py-3 min-w-72 rounded-md cursor-text" placeholder={placeHolder} />
+       text-gray-400 px-4 py-3 min-w-72 rounded-md cursor-text" placeholder={placeHolder}/>
   )
 }
 
