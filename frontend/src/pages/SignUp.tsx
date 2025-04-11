@@ -5,24 +5,37 @@ import ToggleButtonComponent from "../components/ToggleButton";
 import { signUpSubmitFormSeller , signUpSubmitFormUser} from "../util/submitForm";
 import { toggleAtom } from "../store/toggleButton";
 import { useRecoilValue } from "recoil";
+import { useNavigate } from "react-router";
+
 
 function SignUp() {
     const ref = useRef<any>(Array(3).fill(0));
     const toggleData = useRecoilValue(toggleAtom);
+    const navigate = useNavigate();
 
 
     async function sellerSubmitForm() {
         const arr = ref.current.map((input: any) => input?.value);
         console.log('seller')
-        const status = await signUpSubmitFormSeller({ name: arr[0] , email: arr[1] , password: arr[0] })
-        console.log(status);
+        const response = await signUpSubmitFormSeller({ name: arr[0] , email: arr[1] , password: arr[0] })
+        console.log(response)
+        if(response?.status === 200) {
+            navigate('../signin')
+        } else if(response?.status === 400){
+            alert(response?.data.error.issues[0].message);
+        }
     }
 
     async function userSubmitForm() {
         const arr = ref.current.map((input: any) => input?.value);
         console.log('user')
-        const status = await signUpSubmitFormUser({ name: arr[0] , email: arr[1] , password: arr[0] })
-        console.log(status);
+        const response = await signUpSubmitFormUser({ name: arr[0] , email: arr[1] , password: arr[0] })
+        console.log(response);
+        if(response?.status === 200) {
+            navigate('../signin')
+        } else if(response?.status === 400){
+            alert(response?.data.error.issues[0].message);
+        }
     }
 
     // @ts-ignore

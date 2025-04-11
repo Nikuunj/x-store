@@ -6,39 +6,46 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { toggleAtom } from "../store/toggleButton";
 import { signInSubmitFormSeller, signInSubmitFormUser } from "../util/submitForm";
 import { userNameState } from "../store/userInfo";
+import { useNavigate } from "react-router";
 
 
 function SignIn() {
     const ref = useRef<any>(Array(2).fill(0));
     const toggleData = useRecoilValue(toggleAtom);
     const setUserName = useSetRecoilState(userNameState);
+    const navigate = useNavigate();
 
     async function sellerSubmitForm() {
         const arr = ref.current.map((input: any) => input?.value);
         
-        // const response = await signInSubmitFormSeller({ name: arr[0] , email: arr[1] , password: arr[0] })
-        // if(response?.status === 400) {
-
-        console.log('click');
+        const response = await signInSubmitFormSeller({ email: arr[0] , password: arr[1] })
+        console.log(response);
         
-        // } else {
+        if(response?.status === 200) {
             localStorage.setItem('auther', 'seller')
             localStorage.setItem('autherName', 'sellerName')
             setUserName('sellerName')
-        // }
+            navigate('../')
+        } else if(response?.status === 400) {
+            alert(response?.data.error.issues[0].message);
+        } else {
+            alert(response?.data.message);
+        }
     }
 
     async function userSubmitForm() {
-        // const arr = ref.current.map((input: any) => input?.value);
-        // const response = await signInSubmitFormUser({ name: arr[0] , email: arr[1] , password: arr[0] })
-        // if(response?.status === 400) {
-            console.log('click');
-        
-        // } else {
-            localStorage.setItem('auther', 'user')
-            localStorage.setItem('autherName', 'userName')
-            setUserName('userName')
-        // }
+        const arr = ref.current.map((input: any) => input?.value);
+        const response = await signInSubmitFormUser({ email: arr[0] , password: arr[1] })
+        if(response?.status === 200) {
+            localStorage.setItem('auther', 'seller')
+            localStorage.setItem('autherName', 'sellerName')
+            setUserName('sellerName')
+            navigate('../')
+        } else if(response?.status === 400) {
+            alert(response?.data.error.issues[0].message);
+        } else {
+            alert(response?.data.message);
+        }
     }
 
     // @ts-ignore
