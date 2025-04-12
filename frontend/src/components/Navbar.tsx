@@ -5,7 +5,7 @@ import TextBlock from "./TextBlock";
 import { userNameState } from "../store/userInfo";
 import { memo, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom'; // ✅ fixed import
-import { signOutState } from "../store/oepnCloseState";
+import { signOutState } from "../store/openCloseState";
 import { signOutFunction, singInWithToken } from "../util/submitForm"; // ✅ make sure this is imported
 
 function Navbar() {

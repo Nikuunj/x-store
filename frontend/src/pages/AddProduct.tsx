@@ -13,7 +13,10 @@ function AddProduct() {
         const arr = ref.current.map((input: any) => input?.value)
 
         // { title, price, description,  imageLink }
-        const response =  await addProduct({ title: arr[0], price: arr[1], description: arr[2],  imageLink: arr[3] })
+        const response =  await addProduct({ title: arr[0], price: parseInt(arr[1]), description: arr[2],  imageLink: arr[3] })
+        if(response?.status === 200) {
+            alert(response.data.msg);
+        }
         if(response?.status === 401) {
             navigate('../../signin')
         } else if(response?.status === 400){

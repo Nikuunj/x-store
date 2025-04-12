@@ -29,7 +29,7 @@ export const LinkNav = [
         to: 'product'
     }, 
     {
-        name: 'Cart',
+        name: 'Order',
         to: 'user/purchases'
     },
     {
@@ -42,7 +42,7 @@ export const LinkNav = [
     },
     {
         name: 'View Product',
-        to: 'seller/purchases'
+        to: 'seller/viewproduct'
     }, 
 ]
 

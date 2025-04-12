@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil"
 import BarIcon from "../icons/BarIcon"
-import { navBarAtom } from "../store/oepnCloseState"
+import { navBarAtom } from "../store/openCloseState"
 import { LinkNav } from "../util/util";
 import { Link } from "react-router";
 
