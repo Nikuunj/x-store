@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { submitAtom } from "../store/oepnCloseState";
+import { submitAtom } from "../store/openCloseState";
 import TextBlock from "./TextBlock";
 
 interface SubmitCheckerProps {

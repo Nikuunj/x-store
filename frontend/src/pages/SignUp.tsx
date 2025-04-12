@@ -18,7 +18,7 @@ function SignUp() {
     async function sellerSubmitForm() {
         const arr = ref.current.map((input: any) => input?.value);
         console.log('seller')
-        const response = await signUpSubmitFormSeller({ name: arr[0] , email: arr[1] , password: arr[0] })
+        const response = await signUpSubmitFormSeller({ name: arr[0] , email: arr[1] , password: arr[2] })
         console.log(response)
         if(response?.status === 200) {
             navigate('../signin')
@@ -30,7 +30,7 @@ function SignUp() {
     async function userSubmitForm() {
         const arr = ref.current.map((input: any) => input?.value);
         console.log('user')
-        const response = await signUpSubmitFormUser({ name: arr[0] , email: arr[1] , password: arr[0] })
+        const response = await signUpSubmitFormUser({ name: arr[0] , email: arr[1] , password: arr[2] })
         console.log(response);
         if(response?.status === 200) {
             navigate('../signin')

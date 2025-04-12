@@ -1,24 +1,23 @@
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
-import { showDetailState, userOrderOpenAtomFamily } from "../store/openCloseState";
-import { userPurchaseSelectorFamily } from "../store/fetchUserPurchase";
+import { sellerOwnOpenAtomFamily, showDetailState } from "../store/openCloseState";
+import { sellerOwnProductSelectorFamily } from "../store/fetchSellerOwnProduct";
+import { memo } from "react";
 import CloseIcon from "../icons/CloseIcon";
 import BigImage from "./BigImage";
-import { memo } from "react";
-import MapPin from "../icons/MapPin";
-import StatusIcon from "../icons/StatusIcon";
 
 
-function UserSingleOrderDetail({ id }: { id: string }) {
-    const [open, setOpen] = useRecoilState(userOrderOpenAtomFamily(id));
-    const data = useRecoilValueLoadable(userPurchaseSelectorFamily(id));
+function SellerSingleOwnDetail({ id }: { id: string }) {
+    const [open, setOpen] = useRecoilState(sellerOwnOpenAtomFamily(id));
+    const data = useRecoilValueLoadable(sellerOwnProductSelectorFamily(id));
     const handleClose = () => {
         setOpen(false);
     }
 
+    
     if (data.state === 'loading') {
         return (
             <>
-                {open && <>Loding</>}
+                {open && <>Loading...</>}
             </>
         )
     }
@@ -30,7 +29,6 @@ function UserSingleOrderDetail({ id }: { id: string }) {
             </>
         )
     }
-
     return (
         <>
             {open && (
@@ -49,15 +47,12 @@ function UserSingleOrderDetail({ id }: { id: string }) {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className={"flex justify-center items-center"}>
-                            <BigImage urlImage={data.contents.productId.imageLink} title={data.contents.productId.imageLink} />
+                            <BigImage urlImage={data.contents.imageLink} title={data.contents.imageLink} />
                         </div>
                         <div className={"text-justify wrap-anywhere overflow-y-auto"}>
-                            <p className={"font-semibold text-base md:text-lg mb-1"}>{data.contents.productId.title}</p>
-                            <p className={" mb-1"}>Sold by: {data.contents.productId.sellerId.name}</p>
-                            <p className={"text-emerald-400 font-semibold mb-1.5"}>₹ {data.contents.productId.price}</p>
-                            <p className={"font-semibold mb-1.5 flex gap-2"}><StatusIcon /> {data.contents.status}</p>
-                            <p className={"font-semibold mb-1.5 flex gap-2"}><MapPin /> {data.contents.where}</p>
-                            <ShowDetail detail={data.contents.productId.description}/>
+                            <p className={"font-semibold text-base md:text-lg mb-1"}>{data.contents.title}</p>
+                            <p className={"text-emerald-400 font-semibold mb-1"}>₹ {data.contents.price}</p>
+                            <ShowDetail detail={data.contents.description}/>
                         </div>
                     </div>
                 </div>
@@ -65,7 +60,6 @@ function UserSingleOrderDetail({ id }: { id: string }) {
         </>
     )
 }
-
 
 function ShowDetail({ detail }: { detail: string }) {
     const [show, setShow] = useRecoilState(showDetailState);
@@ -85,4 +79,4 @@ function ShowDetail({ detail }: { detail: string }) {
     )
 }
 
-export default memo(UserSingleOrderDetail)
+export default memo(SellerSingleOwnDetail)
