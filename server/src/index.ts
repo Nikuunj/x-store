@@ -12,7 +12,10 @@ const { MONGOOSE_CONNECTION_STRING } = config
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors());
+app.use(cors({ 
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 
 app.use('/signout', signout)
 app.use('/seller', sellerRouter)
@@ -20,7 +23,7 @@ app.use('/user', userRouter)
 app.use('/product', productRouter)
 
 async function main() {
-    mongoose.connect(MONGOOSE_CONNECTION_STRING)
+    await mongoose.connect(MONGOOSE_CONNECTION_STRING)
     console.log('database connected');
     
     app.listen(3000, () => {

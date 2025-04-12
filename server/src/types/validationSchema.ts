@@ -9,10 +9,10 @@ export const userSchema = z.object({
 });
 
 export const productSchema = z.object({
-    title: z.string().min(10, { message: "Name cannot be empty" }),
-    description: z.string().min(50),
+    title: z.string().min(5, { message: "Title is too Short" }),
+    description: z.string().min(20),
     price: z.number().min(2, { message: "Your pass is too short " }),
-    imageLink: z.string().min(5, { message: "It not url" }).url(),
+    imageLink: z.string().url(),
 });
 
 export const userSellerSignIn = userSchema.pick({ email: true, password: true });

@@ -67,16 +67,12 @@ const userSignIn =  async (req: Request, res: Response) => {
 
     if (passwordMatch) {
         const token = jwt.sign( {id :user._id.toString()}, USER_JWT_SECRET, {
-            expiresIn: "7d", // Token valid for 7 days
+            expiresIn: "7d",
         })
-        res.cookie('token', `Bearer ${token}`, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "strict",
-            maxAge: 7 * 24 * 60 * 60 * 1000, 
-        })
+        res.cookie('token', `Bearer ${token}`)
         res.status(200).json({
-            token
+            token,
+            name: user.name
         });
         return
     } else {
@@ -112,7 +108,7 @@ const userGetPurchased = async (req: Request, res: Response) => {
     const userId = req.userId;
 
     try {
-        const owenProduct = await purchaseModel.find({
+        const productAll = await purchaseModel.find({
             userId
         }).populate({
             path : 'productId',
@@ -123,7 +119,7 @@ const userGetPurchased = async (req: Request, res: Response) => {
             }
         })
         res.json({
-            owenProduct
+            productAll
         })
     } catch(e) {
         res.status(500).json({

@@ -10,6 +10,8 @@ import { Types } from "mongoose";
 const { ADMIN_JWT_SECRET } = config
 
 const sellerSignUp = async (req: Request, res: Response) => {
+    console.log(req.body);
+    
 
     // validation
     const validaton = userSchema.safeParse(req.body);
@@ -76,12 +78,13 @@ const sellerSignIn = async (req: Request, res: Response) => {
         })
         res.cookie('token', `Bearer ${token}`, {
             httpOnly: true,
-            secure: true,
-            sameSite: "strict",
-            maxAge: 7 * 24 * 60 * 60 * 1000, 
-        })
+            secure: false,
+            sameSite: 'lax', 
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });          
         res.status(200).json({
-            token
+            token,
+            name: user.name
         });
         return
     } else {

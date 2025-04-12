@@ -6,6 +6,7 @@ const { ADMIN_JWT_SECRET } = config
 
 export const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const tokenArr =  req.cookies.token
+    
         try {
             const token = tokenArr.split(" ")[1];
             const verify = jwt.verify(token, ADMIN_JWT_SECRET) as JwtPayload;
@@ -19,8 +20,6 @@ export const sellerMiddleware = (req: Request, res: Response, next: NextFunction
 }
 
 export const loginWithToken = async (req: Request, res: Response) => {
-    
-    
 
     const tokenArr =  req.cookies.token
     try {
