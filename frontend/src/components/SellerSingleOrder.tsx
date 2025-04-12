@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import RightArrow from '../icons/RightArrow'
 import { useRecoilValueLoadable, useSetRecoilState } from 'recoil'
-import { sellerOrderOpenAtomFamily } from '../store/oepnCloseState'
+import { sellerOrderOpenAtomFamily } from '../store/openCloseState'
 import { sellerOrderSelectorFamily } from '../store/fetchOrderSeller'
 
 

@@ -1,5 +1,5 @@
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
-import { sellerOrderOpenAtomFamily, showDetailState } from "../store/oepnCloseState";
+import { sellerOrderOpenAtomFamily, showDetailState } from "../store/openCloseState";
 import { sellerOrderSelectorFamily } from "../store/fetchOrderSeller";
 import { memo } from "react";
 import MapPin from "../icons/MapPin";
