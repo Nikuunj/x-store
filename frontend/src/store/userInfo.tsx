@@ -9,12 +9,13 @@ const userNameDefaultSelector = selector<string>({
     if(auther) {
       const isValid = await singInWithToken(auther);
       if(!isValid) {
+        console.log('not valid')
         localStorage.removeItem('autherName');
         localStorage.removeItem('auther');
         return '';
       }
     }
-    return localStorage.getItem('autherName');
+    return localStorage.getItem('autherName') ?? '';
   },
 });
     

@@ -4,7 +4,7 @@ import { placeOrderInputRef } from "../util/util";
 import TextBlock from "../components/TextBlock";
 import BigImage from "../components/BigImage";
 import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
-import { submitAtom } from "../store/oepnCloseState";
+import { submitAtom } from "../store/openCloseState";
 import SubmitChecker from "../components/SubmitChecker";
 import { useNavigate, useParams } from 'react-router'
 import { purchaseOrderFormUser } from "../util/submitForm";

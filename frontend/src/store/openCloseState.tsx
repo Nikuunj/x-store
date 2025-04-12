@@ -35,3 +35,8 @@ export const sellerOrderOpenAtomFamily = atomFamily<boolean, string>({
     key: 'sellerOrderOpenAtomFamily',
     default: false,
 });
+
+export const sellerOwnOpenAtomFamily = atomFamily<boolean, string>({
+    key: 'sellerOwnOpenAtomFamily',
+    default: false,
+});

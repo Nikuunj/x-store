@@ -1,7 +1,10 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
+const config: AxiosRequestConfig = {
+    withCredentials: true,
+  };
 
 interface SignupFromType {
     name:string;
@@ -25,11 +28,13 @@ interface addProductInterface {
 
 export async function signUpSubmitFormUser({ name, email , password }: SignupFromType): Promise<AxiosResponse<any> | undefined> {
 
+    console.log({name, email, password});
+    
     try {
         const response = await axios.post(`${BACKEND_URL}/user/signup`, {
             name,
             email,
-            password  
+            password
         })
 
         return response;
@@ -59,10 +64,9 @@ export async function signInSubmitFormUser({ email , password }: SignInFromType)
 
     try {
         const response = await axios.post(`${BACKEND_URL}/user/signin`, {
-            name,
             email,
             password  
-        })
+        }, config)
         return response;
     } catch(e) {
         if (axios.isAxiosError(e) && e.response) {
@@ -73,10 +77,9 @@ export async function signInSubmitFormUser({ email , password }: SignInFromType)
 export async function signInSubmitFormSeller({ email , password }: SignInFromType): Promise<AxiosResponse<any> | undefined> {
     try {
         const response = await axios.post(`${BACKEND_URL}/seller/signin`, {
-            name,
             email,
             password  
-        })
+        }, config )
         return response;
     } catch(e) {
         if (axios.isAxiosError(e) && e.response) {
@@ -89,7 +92,7 @@ export async function purchaseOrderFormUser({ deliveyAddress, productId }: Purch
     try {
         const response = await axios.post(`${BACKEND_URL}/user/product/${productId}`, {
             deliveyAddress
-        })
+        }, config)
         return response
     } catch(e) {
         if (axios.isAxiosError(e) && e.response) {
@@ -100,7 +103,7 @@ export async function purchaseOrderFormUser({ deliveyAddress, productId }: Purch
 
 export async function signOutFunction(): Promise<boolean> {
     try {
-        await axios.get(`${BACKEND_URL}/signout`)
+        await axios.get(`${BACKEND_URL}/signout`, config)
         return true
     } catch(e) {
         return false
@@ -109,7 +112,7 @@ export async function signOutFunction(): Promise<boolean> {
 
 export async function singInWithToken(auther:string): Promise<boolean> {
     try {
-        await axios.get(`${BACKEND_URL}/${auther}`)
+        await axios.get(`${BACKEND_URL}/${auther}`, config)
         return true
     } catch(e) {
         return false
@@ -118,6 +121,8 @@ export async function singInWithToken(auther:string): Promise<boolean> {
 
 // const { title, description, price, imageLink } = req.body
 export async function addProduct({ title, price, description,  imageLink }: addProductInterface): Promise<AxiosResponse<any> | undefined> {
+
+    console.log({ title, price, description,  imageLink });
     
     try {
         const response = await axios.post(`${BACKEND_URL}/seller/product`, {
@@ -125,7 +130,7 @@ export async function addProduct({ title, price, description,  imageLink }: addP
             description,
             price,
             imageLink
-        })
+        }, config)
         return response
     } catch(e) {
         if (axios.isAxiosError(e) && e.response) {
