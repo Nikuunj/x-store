@@ -4,9 +4,20 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const sellerOrderListDefaultSelector = selector<any[]>({
     key: 'sellerOrderListDefaultSelector/Default',
     get: async () => {
-        const res = await fetch(`${BACKEND_URL}/seller/purchase`);
-        if (!res.ok) throw new Error('Failed to fetch orders');
-        return await res.json();
+      try {
+          const res = await fetch(`${BACKEND_URL}/seller/purchase`, {
+            credentials: "include",
+          });
+    
+          if (!res.ok) {
+            throw new Error('Failed to fetch orders');
+          }
+    
+          const data = await res.json();
+          return data.innterJoin || [];
+      } catch (err) {
+        throw err;
+      }
     },
 });
 
@@ -19,7 +30,7 @@ export const sellerOrderIdListSelector = selector<number[]>({
     key: 'sellerOrderIdListSelector',
     get: ({ get }) => {
         const orders = get(sellerOrderListState);
-        return orders.map((user: any) => user.id);
+        return orders.map((order: any) => order._id);
     },
 });
 
@@ -29,6 +40,6 @@ export const sellerOrderSelectorFamily = selectorFamily<any | null, string>({
         (orderId: string) =>
         ({ get }) => {
         const orders = get(sellerOrderListState)
-        return orders.find((user: any) => user.id == orderId) || null
-        },
+        return orders.find((order: any) => order._id == orderId) || null
+    },
 })
