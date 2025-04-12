@@ -86,14 +86,15 @@ const userSignIn =  async (req: Request, res: Response) => {
 const userProductPurchase = async (req: Request, res: Response) => {
     const userId = req.userId;
     const productId = req.params.productId;
-    const deliveyAddress = req.body.deliveyAddress;
+    const deliveryAddress = req.body.deliveyAddress;
 
     try {
         await purchaseModel.create({
             userId,
             productId,
-            deliveyAddress
+            deliveryAddress
         })
+        
         res.json({
             msg: 'product purchased'
         })
@@ -112,7 +113,6 @@ const userGetPurchased = async (req: Request, res: Response) => {
             userId
         }).populate({
             path : 'productId',
-            select : ['title', 'price', 'sellerId'],
             populate: {
                 path: 'sellerId',
                 select: 'name'
