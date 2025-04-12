@@ -1,5 +1,5 @@
 import { useRecoilState, useRecoilValueLoadable } from "recoil"
-import { productOpenStateFamily, showDetailState } from "../store/oepnCloseState";
+import { productOpenStateFamily, showDetailState } from "../store/openCloseState";
 import BigImage from "./BigImage";
 import { productSelectorFamily } from "../store/fetchProduct";
 import CloseIcon from "../icons/CloseIcon";

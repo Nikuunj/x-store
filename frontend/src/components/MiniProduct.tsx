@@ -1,7 +1,7 @@
 
 import { useRecoilValueLoadable, useSetRecoilState } from 'recoil'
 import TextBlock, { TextBlockProps } from './TextBlock'
-import { productOpenStateFamily } from '../store/oepnCloseState'
+import { productOpenStateFamily } from '../store/openCloseState'
 import React from 'react'
 import { Link } from 'react-router'
 import { productSelectorFamily } from '../store/fetchProduct'
