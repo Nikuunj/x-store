@@ -35,8 +35,8 @@ function ProductDetail({ id }: { id: string }) {
                         className={"bg-zinc-900 h-max p-6 mx-0 my-auto md:px-10 py-3 min-w-72 w-full max-w-2xl rounded-lg"}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className={"flex justify-center"}>
-                            <BigImage urlImage={'/t-shirt.png'} title={'Image'} />
+                        <div className={"flex justify-center items-center"}>
+                            <BigImage urlImage={data.contents.imageLink} title={data.contents.imageLink} />
                         </div>
                         <div className={"text-justify wrap-anywhere overflow-y-auto"}>
                             <p className={"font-semibold text-base md:text-lg mb-1"}>{title}</p>

@@ -53,7 +53,7 @@ function MiniProduct({ id } : { id: string }) {
                 transition-all duration-300  outline-1 rounded-lg outline-zinc-500
                 shadow-3xl/50 shadow-indigo-700/95 hover:shadow-emerald-600/90">
                     <div className="bg-zinc-900/60 w-full lg:w-auto py-2 lg:py-0 flex justify-center">
-                        <img className="h-60 min-w-40 rounded-md lg:rounded-s-lg" src={'/t-shirt.png'} alt={'image'} />  
+                        <img className="h-60 min-w-40 lg:max-w-44 rounded-md lg:rounded-s-lg" src={data.contents.imageLink} alt={'image'} />  
                     </div> 
                     <div className="lg:pl-2 pb-2 lg:pb-0 flex flex-col  gap-1">
                         <div className='max-w-[150px] flex flex-col gap-1 text-ellipsis'>
