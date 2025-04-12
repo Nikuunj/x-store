@@ -15,7 +15,7 @@ function NavComponent() {
 
     const filteredLinks = LinkNav.filter(link => {
         if (!auther && (link.name === 'Home' || link.name === 'Shop')) return true;
-        if (auther === 'user' && (link.name === 'Home' || link.name === 'Shop' || link.name === 'Cart')) return true;
+        if (auther === 'user' && (link.name === 'Home' || link.name === 'Shop' || link.name === 'Order')) return true;
         if (auther === 'seller' && (link.name === 'Home' || link.name === 'Orders' || link.name === 'Add Product' || link.name === 'View Product')) return true;
         return false;
     });
@@ -34,7 +34,7 @@ function NavComponent() {
                 `}
             >
                 {filteredLinks.map((item, index) => (
-                    <Link key={index}  to={item.to} className=" cursor-pointer ">
+                    <Link key={index}  to={item.to} className="cursor-pointer ">
                         <div className="ps-4 py-2">
                             {item.name}
                         </div>
