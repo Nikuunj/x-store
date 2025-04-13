@@ -1,4 +1,5 @@
 import express  from 'express';
+import session from 'express-session';
 import cors from "cors";
 import cookieParser from 'cookie-parser';
 import { sellerRouter } from './routes/sellerRouter'
@@ -8,7 +9,7 @@ import { signout } from './controller/SignoutController';
 import mongoose from 'mongoose';
 import { config } from './config/config';
 const app = express();
-const { MONGOOSE_CONNECTION_STRING } = config
+const { MONGOOSE_CONNECTION_STRING, SESSION_SECRET } = config
 
 app.use(express.json())
 app.use(cookieParser())
@@ -17,6 +18,19 @@ const allowedOrigins = ['http://localhost:5173' , 'https://x-store-nine.vercel.a
 app.use(cors({
     origin: allowedOrigins,
     credentials: true
+}));
+
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false,
+    proxy: true,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
+    }
 }));
 
 app.use('/signout', signout)

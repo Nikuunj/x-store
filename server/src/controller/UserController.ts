@@ -74,7 +74,6 @@ const userSignIn =  async (req: Request, res: Response) => {
             secure: true,
             sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            domain: PRODUCTION === 'production' ? FRONTEND_DOMAIN : 'localhost', 
         })
         res.status(200).json({
             token,
