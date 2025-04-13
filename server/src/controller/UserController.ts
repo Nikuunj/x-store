@@ -4,7 +4,7 @@ import { userSchema, userSellerSignIn } from "../types/validationSchema";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { config } from '../config/config'
-const { USER_JWT_SECRET, FRONTEND_DOMAIN } = config;
+const { USER_JWT_SECRET, FRONTEND_DOMAIN, PRODUCTION } = config;
 
 const userSignUp =  async (req: Request, res: Response) => {
     
@@ -74,7 +74,7 @@ const userSignIn =  async (req: Request, res: Response) => {
             secure: true,
             sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            domain: process.env.PRODUCTION === 'production' ? FRONTEND_DOMAIN : 'localhost', 
+            domain: PRODUCTION === 'production' ? FRONTEND_DOMAIN : 'localhost', 
         })
         res.status(200).json({
             token,
