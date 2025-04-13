@@ -7,7 +7,6 @@ const productListDefaultSelector = selector<any[]>({
     const res = await fetch(`${BACKEND_URL}/product/0`);
     if (!res.ok) throw new Error('Failed to fetch products');
     const data = await res.json(); // call this ONLY ONCE
-    console.log(data); // Optional: for debugging
     return data.productAll
   },
 });
