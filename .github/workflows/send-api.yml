@@ -2,7 +2,7 @@ name: Send GET API Every 5 Minutes
 
 on:
   schedule:
-    - cron: '2.5/5 * * * *'  # Runs at 2:30, 7:30, 12:30, etc. (UTC)
+    - cron: '0/5 * * * *'  # Runs at 2:30, 7:30, 12:30, etc. (UTC)
   workflow_dispatch:        # Optional: allows manual trigger
 
 jobs:
