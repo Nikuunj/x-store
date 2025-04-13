@@ -13,7 +13,7 @@ const { MONGOOSE_CONNECTION_STRING } = config
 app.use(express.json())
 app.use(cookieParser())
 
-const allowedOrigins = ['http://localhost:5173' , 'https://x-store-nine.vercel.app/'];
+const allowedOrigins = ['http://localhost:5173' , 'https://x-store-nine.vercel.app'];
 app.use(cors({
     origin: allowedOrigins,
     credentials: true
