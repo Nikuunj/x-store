@@ -11,11 +11,11 @@ export interface TextBlockProps {
 function TextBlock({ variant, size, textSize, text, onClick } : TextBlockProps) {
 
     const styleVariant = {
-        default: 'hover:bg-amber-500 hover:text-zinc-700',
-        sell: 'outline-1 outline-emerald-800 hover:bg-emerald-900  cursor-pointer',
-        detail: 'outline-1 outline-indigo-600 hover:bg-indigo-900  cursor-pointer',
-        denger: 'outline-1 outline-red-800/60 hover:bg-red-800/60  cursor-pointer',
-        signin: 'outline-1 outline-emerald-800 hover:bg-emerald-900/55 cursor-pointer'
+        default: 'hover:bg-amber-500 active:bg-amber-500 hover:text-zinc-700 active:text-zinc-700',
+        sell: 'outline-1 outline-emerald-800 hover:bg-emerald-900 active:bg-emerald-900 cursor-pointer',
+        detail: 'outline-1 outline-indigo-600 hover:bg-indigo-900 active:bg-indigo-900 cursor-pointer',
+        denger: 'outline-1 outline-red-800/60 hover:bg-red-800/60 active:bg-red-800/60 cursor-pointer',
+        signin: 'outline-1 outline-emerald-800 hover:bg-emerald-900/55 active:bg-emerald-900/55 cursor-pointer'
     }
 
     const boxSizeStyle = {

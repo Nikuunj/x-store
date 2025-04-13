@@ -51,7 +51,7 @@ function MiniProduct({ id } : { id: string }) {
     return (
         <div className="w-72 lg:w-96 flex flex-col lg:flex-row items-center tracking-wider gap-2  text-zinc-300 
                 transition-all duration-300  outline-1 rounded-lg outline-zinc-500
-                shadow-3xl/50 shadow-indigo-700/95 hover:shadow-emerald-600/90">
+                shadow-3xl/50 shadow-indigo-700/95   hover:shadow-emerald-600/90 active:shadow-emerald-600/90">
                     <div className="bg-zinc-900/60 w-full lg:w-auto py-2 lg:py-0 flex justify-center">
                         <img className="h-60 min-w-40 lg:max-w-44 rounded-md lg:rounded-s-lg" src={data.contents.imageLink} alt={'image'} />  
                     </div> 

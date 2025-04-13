@@ -91,7 +91,7 @@ const UserName = ({ userName }: { userName: string }) => {
       </div>
       <div
         className={`
-          transition-all duration-300 fixed -translate-x-10 w-28 bg-zinc-800/70 hover:bg-zinc-700/75 text-center rounded-lg
+          transition-all duration-300 fixed -translate-x-10 w-28 bg-zinc-800/70 hover:bg-zinc-700/75 active:bg-zinc-700/75 text-center rounded-lg
           ${open ? "translate-y-12" : "-translate-y-52"} cursor-pointer
         `}
         onClick={signOutHandle}

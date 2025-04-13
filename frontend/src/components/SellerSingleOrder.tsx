@@ -31,7 +31,7 @@ function SellerSingleOrder( { id }: { id: string }) {
 
   
   return (
-    <div className={"flex gap-10 items-center cursor-pointer sm:text-lg text-sm justify-between rounded-lg transition-all duration-300 bg-zinc-500/30 hover:bg-zinc-600/50 py-2 px-3 sm:px-4"}
+    <div className={"flex gap-10 items-center cursor-pointer sm:text-lg text-sm justify-between rounded-lg transition-all duration-300 bg-zinc-500/30 hover:bg-zinc-600/50 active:bg-zinc-600/50 py-2 px-3 sm:px-4"}
     onClick={handleOpen}
     >
       <div className={"flex justify-center items-center gap-6"}>

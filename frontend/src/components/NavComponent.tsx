@@ -13,6 +13,9 @@ function NavComponent() {
         setOpen(pre => !pre);
     }
 
+    function closeNav() {
+        setOpen(false)
+    }
     const filteredLinks = LinkNav.filter(link => {
         if (!auther && (link.name === 'Home' || link.name === 'Shop')) return true;
         if (auther === 'user' && (link.name === 'Home' || link.name === 'Shop' || link.name === 'Order')) return true;
@@ -34,7 +37,7 @@ function NavComponent() {
                 `}
             >
                 {filteredLinks.map((item, index) => (
-                    <Link key={index}  to={item.to} className="cursor-pointer ">
+                    <Link key={index} onClick={closeNav}  to={item.to} className="cursor-pointer ">
                         <div className="ps-4 py-2">
                             {item.name}
                         </div>

@@ -71,7 +71,7 @@ function PlaceOrder() {
     ))
     return (
         <div className="flex justify-center px-2">
-            <div className={"my-4 outline-1 rounded-lg outline-zinc-500 flex justify-center flex-col items-center px-1 md:px-5 py-1 md:py-5 shadow-indigo-700 hover:shadow-emerald-600 shadow-3xl/50 "}>
+            <div className={"my-4 outline-1 rounded-lg outline-zinc-500 flex justify-center flex-col items-center px-1 md:px-5 py-1 md:py-5 shadow-indigo-700 hover:shadow-emerald-600 active:shadow-emerald-600 shadow-3xl/50 "}>
                 <div className={'flex flex-col sm:flex-row items-center  gap-3 md:gap-8'}>                
                     <BigImage urlImage={data.contents.imageLink} title={'Image'} />
                     <div className={" max-w-96 grid grid-cols-12 min-w-72 gap-1 mt-2 pr-8"}>
