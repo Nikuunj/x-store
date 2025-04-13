@@ -12,10 +12,11 @@ const userNameDefaultSelector = selector<string>({
         console.log('not valid')
         localStorage.removeItem('autherName');
         localStorage.removeItem('auther');
+        localStorage.removeItem('token');
         return '';
       }
     }
-    return localStorage.getItem('autherName') ?? '';
+    return localStorage.getItem('autherName') ?? ''
   },
 });
     

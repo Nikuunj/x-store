@@ -1,13 +1,18 @@
 import { atom, selector, selectorFamily } from "recoil";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
+const getAuthHeader = () => ({
+  headers: {
+      token: localStorage.getItem('token') || ''
+  }
+});
+
+
 const sellerOrderListDefaultSelector = selector<any[]>({
     key: 'sellerOrderListDefaultSelector/Default',
     get: async () => {
       try {
-          const res = await fetch(`${BACKEND_URL}/seller/purchase`, {
-            credentials: "include",
-          });
+          const res = await fetch(`${BACKEND_URL}/seller/purchase`, getAuthHeader());
     
           if (!res.ok) {
             throw new Error('Failed to fetch orders');

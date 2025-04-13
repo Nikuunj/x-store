@@ -74,14 +74,14 @@ const sellerSignIn = async (req: Request, res: Response) => {
 
     if (passwordMatch) {
         const token = jwt.sign( {id :user._id.toString()}, ADMIN_JWT_SECRET, {
-            expiresIn: "7d", // Token valid for 7 days
+            expiresIn: "7d",
         })
-        res.cookie('token', `Bearer ${token}`, {
-            httpOnly: true,
-            secure: false,
-            sameSite: 'lax', 
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-        });          
+        // res.cookie('token', `Bearer ${token}`, {
+        //     httpOnly: true,
+        //     secure: false,
+        //     sameSite: 'lax', 
+        //     maxAge: 7 * 24 * 60 * 60 * 1000,
+        // });          
         res.status(200).json({
             token,
             name: user.name

@@ -69,12 +69,15 @@ const userSignIn =  async (req: Request, res: Response) => {
         const token = jwt.sign( {id :user._id.toString()}, USER_JWT_SECRET, {
             expiresIn: "7d",
         })
-        res.cookie('token', `Bearer ${token}`,{
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-        })
+        // const isProduction = PRODUCTION === "production";
+
+        // res.cookie('token', `Bearer ${token}`,{
+        //     httpOnly: true,
+        //     secure: isProduction,
+        //     sameSite: isProduction ? "none" : "lax",
+        //     partitioned: isProduction,
+        //     maxAge: 7 * 24 * 60 * 60 * 1000,
+        // })
         res.status(200).json({
             token,
             name: user.name

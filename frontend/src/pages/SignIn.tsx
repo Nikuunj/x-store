@@ -20,11 +20,11 @@ function SignIn() {
         const arr = ref.current.map((input: any) => input?.value);
         
         const response = await signInSubmitFormSeller({ email: arr[0] , password: arr[1] })
-        console.log(response);
         
         if(response?.status === 200) {
             localStorage.setItem('auther', 'seller')
             localStorage.setItem('autherName', response.data.name)
+            localStorage.setItem('token','Bearer ' + response.data.token);
             setUserName('sellerName')
             navigate('../')
         } else if(response?.status === 400) {
@@ -40,6 +40,7 @@ function SignIn() {
         if(response?.status === 200) {
             localStorage.setItem('auther', 'user')
             localStorage.setItem('autherName', response.data.name)
+            localStorage.setItem('token','Bearer ' + response.data.token);
             setUserName('sellerName')
             navigate('../')
         } else if(response?.status === 400) {

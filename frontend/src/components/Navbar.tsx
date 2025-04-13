@@ -6,7 +6,7 @@ import { userNameState } from "../store/userInfo";
 import { memo, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom'; // ✅ fixed import
 import { signOutState } from "../store/openCloseState";
-import { signOutFunction, singInWithToken } from "../util/submitForm"; // ✅ make sure this is imported
+import { singInWithToken } from "../util/submitForm"; // ✅ make sure this is imported
 
 function Navbar() {
   const userName = useRecoilValue(userNameState);
@@ -21,8 +21,7 @@ function Navbar() {
         if (isValid) {
           setUserName(name);
         } else {
-          localStorage.removeItem("auther");
-          localStorage.removeItem("autherName");
+          localStorage.clear();
           setUserName('');
         }
       });
@@ -71,14 +70,15 @@ const UserName = ({ userName }: { userName: string }) => {
   }
 
   async function signOutHandle() {
-    const signedOut = await signOutFunction();
-    if (signedOut) {
+    // const signedOut = await signOutFunction();
+    // if (signedOut) {
       localStorage.removeItem("auther");
+      localStorage.removeItem('token')
       localStorage.removeItem("autherName");
       setOpen(false);
       setUserName("");
-      navigate("/"); // ✅ go to homepage on sign out
-    }
+      navigate("/"); 
+    // }
   }
 
   return (

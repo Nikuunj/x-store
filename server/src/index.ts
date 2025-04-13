@@ -9,7 +9,7 @@ import { signout } from './controller/SignoutController';
 import mongoose from 'mongoose';
 import { config } from './config/config';
 const app = express();
-const { MONGOOSE_CONNECTION_STRING, SESSION_SECRET } = config
+const { MONGOOSE_CONNECTION_STRING } = config
 
 app.use(express.json())
 app.use(cookieParser())
@@ -20,18 +20,6 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(session({
-    secret: SESSION_SECRET,
-    resave: false,
-    proxy: true,
-    saveUninitialized: false,
-    cookie: {
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none'
-    }
-}));
 
 app.use('/signout', signout)
 app.use('/seller', sellerRouter)
