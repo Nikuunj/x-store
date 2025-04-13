@@ -1,13 +1,13 @@
 import express  from 'express';
-import session from 'express-session';
+// import session from 'express-session';
 import cors from "cors";
 import cookieParser from 'cookie-parser';
 import { sellerRouter } from './routes/sellerRouter'
 import { userRouter } from './routes/userRouter'
-import { productRouter } from './routes/productRouter'
-import { signout } from './controller/SignoutController'; 
+import { productRouter } from './routes/productRouter' 
 import mongoose from 'mongoose';
 import { config } from './config/config';
+import { weakUp } from './controller/SignoutController';
 const app = express();
 const { MONGOOSE_CONNECTION_STRING } = config
 
@@ -21,10 +21,10 @@ app.use(cors({
 }));
 
 
-app.use('/signout', signout)
 app.use('/seller', sellerRouter)
 app.use('/user', userRouter)
 app.use('/product', productRouter)
+app.use('/', weakUp)
 
 async function main() {
     await mongoose.connect(MONGOOSE_CONNECTION_STRING)

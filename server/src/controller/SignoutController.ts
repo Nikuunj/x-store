@@ -1,10 +1,11 @@
 import { Request, Response, Router } from 'express'
 
-export const signout = Router();
+export const weakUp = Router();
 
-signout.get('/',  (req: Request, res: Response) => {
-    res.clearCookie('token');
+weakUp.get('/',  (req: Request, res: Response) => {
+    console.log('Req resived')
     res.json({
-        msg : 'singout'
+        message : 'Request resived'
     })
 })
+
