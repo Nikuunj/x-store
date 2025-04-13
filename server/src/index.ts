@@ -7,7 +7,7 @@ import { userRouter } from './routes/userRouter'
 import { productRouter } from './routes/productRouter' 
 import mongoose from 'mongoose';
 import { config } from './config/config';
-import { weakUp } from './controller/SignoutController';
+import { weakUp } from './controller/WeakupController';
 const app = express();
 const { MONGOOSE_CONNECTION_STRING } = config
 
