@@ -4,7 +4,6 @@ import { sellerOrderSelectorFamily } from "../store/fetchOrderSeller";
 import { memo } from "react";
 import MapPin from "../icons/MapPin";
 import StatusIcon from "../icons/StatusIcon";
-import BigImage from "./BigImage";
 import CloseIcon from "../icons/CloseIcon";
 import User from "../icons/User";
 import Mail from "../icons/Mail";
