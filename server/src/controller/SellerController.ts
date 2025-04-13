@@ -205,14 +205,12 @@ const sellerProductDelete = async (req: Request, res: Response) => {
         return
     }
 }
-
 const sellerProductPurchaseGet = async (req: Request, res: Response) => {
-
     const sellerId = new Types.ObjectId(req.userId);
 
     const innterJoin = await productModel.aggregate([
         {
-            $match: { sellerId : sellerId }
+            $match: { sellerId: sellerId }
         },
         {
             $lookup: {
@@ -223,13 +221,50 @@ const sellerProductPurchaseGet = async (req: Request, res: Response) => {
             }
         },
         {
+            $unwind: '$purchasedProduct'
+        },
+        {
+            $lookup: {
+                from: 'users',
+                let: { userId: '$purchasedProduct.userId' },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: { $eq: ['$_id', '$$userId'] }
+                        }
+                    },
+                    {
+                        $project: {
+                            _id: 0,
+                            name: 1,
+                            email: 1
+                        }
+                    }
+                ],
+                as: 'purchasedProduct.user'
+            }
+        },
+        {
+            $unwind: '$purchasedProduct.user'
+        },
+        {
+            $group: {
+                _id: '$_id',
+                title: { $first: '$title' },
+                imageLink: { $first: '$imageLink' },
+                price: { $first: '$price' },
+                description: { $first: '$description' },
+                sellerId: { $first: '$sellerId' },
+                purchasedProduct: { $push: '$purchasedProduct' }
+            }
+        },
+        {
             $match: { "purchasedProduct.0": { $exists: true } }
         }
-    ])
-    res.json({
-        innterJoin
-    })
-}
+    ]);
+
+    res.json({ innterJoin });
+};
 
 const sellerProductPurchasePut = async (req: Request, res: Response) => {
     const purchaseId = req.params.purchaseId;
