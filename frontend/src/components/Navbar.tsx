@@ -32,7 +32,7 @@ function Navbar() {
   return (
     <div className="flex justify-between md:px-10 z-30 h-14 items-center bg-zinc-900/75 fixed top-0 w-screen">
       <Logo />
-      <div className="flex justify-center items-center gap-1">
+      <div className="flex justify-center items-center gap-2">
         <UserInfo userName={userName} />
         <NavComponent />
       </div>
@@ -85,7 +85,7 @@ const UserName = ({ userName }: { userName: string }) => {
     <>
       <div
         onClick={handleOpenClose}
-        className="z-30 transition-all duration-300 bg-indigo-600/60 text-center font-extrabold rounded-full px-4 py-2 cursor-pointer"
+        className="z-30 transition-all duration-300 bg-indigo-600/60 text-center font-extrabold rounded-full sm:px-3.5 sm:py-1.5 px-2.5 py-0.5  cursor-pointer"
       >
         {userName?.charAt(0).toUpperCase()}
       </div>

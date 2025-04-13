@@ -20,6 +20,7 @@ export const signOutState = atom<boolean>({
     default: false,
 })
 
+
 export const navBarAtom = atom<boolean>({
     key: 'navBarAtom',
     default: false,
@@ -38,5 +39,10 @@ export const sellerOrderOpenAtomFamily = atomFamily<boolean, string>({
 
 export const sellerOwnOpenAtomFamily = atomFamily<boolean, string>({
     key: 'sellerOwnOpenAtomFamily',
+    default: false,
+});
+
+export const showDetailStateFamily = atomFamily<boolean, string>({
+    key: 'showDetailStateFamily',
     default: false,
 });
