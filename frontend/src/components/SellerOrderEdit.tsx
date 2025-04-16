@@ -78,7 +78,7 @@ function SellerOrderEdit({ productId, purchaseId }: { productId: string, purchas
                         {render}
                         <div className="flex justify-center gap-5">
                             <TextBlock onClick={handleClose} variant={'denger'} size={'md'} textSize={'md'} text={'Close'} />
-                            <TextBlock onClick={handleEdit} variant={'sell'} size={'md'} textSize={'md'} text={"btntext"} />
+                            <TextBlock onClick={handleEdit} variant={'sell'} size={'md'} textSize={'md'} text={"Edit"} />
                         </div>
                     </div>
                 </div>
