@@ -171,3 +171,18 @@ export async function editProduct({ productId, title, description, price, imageL
         }
     }
 }
+
+export async function editOrder({ purchaseId, status, where }: { purchaseId: string, status: string, where: string}): Promise<AxiosResponse<any> | undefined> {
+
+    try {
+        const response = await axios.put(`${BACKEND_URL}/seller/purchase/${purchaseId}`, {
+            status,
+            where
+        }, getAuthHeader());
+        return response;
+    } catch (e) {
+        if (axios.isAxiosError(e) && e.response) {
+            return e.response;
+        }
+    }
+}

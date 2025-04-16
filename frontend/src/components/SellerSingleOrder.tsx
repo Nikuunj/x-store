@@ -3,6 +3,7 @@ import RightArrow from '../icons/RightArrow'
 import { useRecoilValueLoadable, useSetRecoilState } from 'recoil'
 import { sellerOrderOpenAtomFamily } from '../store/openCloseState'
 import { sellerOrderSelectorFamily } from '../store/fetchOrderSeller'
+import Notification from '../icons/Notification'
 
 
 function SellerSingleOrder( { id }: { id: string }) {
@@ -43,8 +44,8 @@ function SellerSingleOrder( { id }: { id: string }) {
         </div>
       </div>
       <div className={'flex justify-center items-center gap-3 md:gap-10'}>
-          <div className={'text-emerald-400 font-semibold'}>
-          ₹ {data.contents.price}
+          <div className={'flex gap-2 text-zinc-400'}>
+           <Notification /> {data.contents.purchasedProduct.length}
           </div>
           <div className='mt-1.5 md:mt-1'>
             <RightArrow />

@@ -1,14 +1,10 @@
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
-import { sellerOrderOpenAtomFamily, showDetailStateFamily } from "../store/openCloseState";
+import { sellerOrderOpenAtomFamily } from "../store/openCloseState";
 import { sellerOrderSelectorFamily } from "../store/fetchOrderSeller";
 import { memo } from "react";
-import MapPin from "../icons/MapPin";
-import StatusIcon from "../icons/StatusIcon";
+import SellerEditOrderDetail from "./SellerEditOrderDetail";
+import SellerOrderEdit from "./SellerOrderEdit";
 import CloseIcon from "../icons/CloseIcon";
-import User from "../icons/User";
-import Mail from "../icons/Mail";
-import TruckIcon from "../icons/TruckIcon";
-import EditPen from "../icons/EditPen";
 
 
 function SellerSingleOrderDetail({ id }: { id: string }) {
@@ -34,28 +30,13 @@ function SellerSingleOrderDetail({ id }: { id: string }) {
             </>
         )
     }
-
-    // console.log(data.contents);
     const purchasedProduct = data.contents.purchasedProduct
-    console.log(purchasedProduct);
-
 
     const renderOrder = purchasedProduct.map((purchase: any) => (
-        <div key={purchase._id} className={"text-justify wrap-anywhere overflow-y-auto"}>
-            <p className={"font-semibold text-base md:text-lg mb-1 flex justify-between gap-2"}>
-                <div className={"flex gap-2"}>
-                    <User/> {purchase.user.name} 
-                </div>
-                <div className={"cursor-pointer"}>
-                    <EditPen/>
-                </div>
-            </p>
-            <p className={"font-semibold text-base md:text-lg mb-1 flex gap-2"}><Mail/> {purchase.user.email}</p>
-            <p className={"font-semibold mb-1.5 flex gap-2"}><StatusIcon /> {purchase.status}</p>
-            <p className={"font-semibold mb-1.5 flex gap-2"}><MapPin /> {purchase.where}</p>
-            <ShowDetail detail={purchase.deliveryAddress} id={purchase._id}/>
-            <hr />
-        </div>
+        <>
+            <SellerEditOrderDetail productId={id} purchaseId={purchase._id}/>
+            <SellerOrderEdit productId={id} purchaseId={purchase._id}/>
+        </>
     ))
     
     
@@ -86,22 +67,4 @@ function SellerSingleOrderDetail({ id }: { id: string }) {
     )
 }
 
-
-function ShowDetail({ detail, id }: { detail: string, id: string }) {
-    const [show, setShow] = useRecoilState(showDetailStateFamily(id));
-
-    function handleShowdetail() {
-        setShow(pre => !pre);
-    }
-    return (
-        <>
-            <p className={`text-zinc-300 ${show ? '' : 'truncate'} flex gap-2`}>
-            <TruckIcon/> {detail}
-            </p>
-            <div onClick={handleShowdetail} className="z-50 px-3 py-2 inline-block -translate-x-3 text-blue-400 cursor-pointer underline">
-                {show ? 'show less' : 'show more'}
-            </div>
-        </>
-    )
-}
 export default memo(SellerSingleOrderDetail)

@@ -32,6 +32,11 @@ export const navBarAtom = atom<boolean>({
 })
 
 
+export const sellerOrderEditAtomFamily = atomFamily<boolean, string>({
+    key: 'sellerOrderEditAtomFamily',
+    default: false,
+});
+
 export const userOrderOpenAtomFamily = atomFamily<boolean, string>({
     key: 'UserOrderOpenAtomFamily',
     default: false,

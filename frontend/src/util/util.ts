@@ -94,3 +94,16 @@ export const addProductInputRef = [
         defaultVal: "imageLink"
     },
 ]
+
+export const editProdcutInputRef = [
+    {
+        types: "text",
+        placeHolder: 'Order Status',
+        defaultVal: "status"
+    },
+    {
+        types: "text",
+        placeHolder: 'Order Location',
+        defaultVal: "where"
+    },
+]

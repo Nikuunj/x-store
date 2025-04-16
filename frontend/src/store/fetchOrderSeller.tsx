@@ -34,17 +34,27 @@ export const sellerOrderListState = atom<any[]>({
 export const sellerOrderIdListSelector = selector<number[]>({
     key: 'sellerOrderIdListSelector',
     get: ({ get }) => {
-        const orders = get(sellerOrderListState);
-        return orders.map((order: any) => order._id);
+        const products = get(sellerOrderListState);
+        return products.map((product: any) => product._id);
     },
 });
 
 export const sellerOrderSelectorFamily = selectorFamily<any | null, string>({
     key: 'sellerOrderSelectorFamily',
     get:
-        (orderId: string) =>
+        (productId: string) =>
         ({ get }) => {
-        const orders = get(sellerOrderListState)
-        return orders.find((order: any) => order._id == orderId) || null
+        const products = get(sellerOrderListState)
+        return products.find((product: any) => product._id == productId) || null
     },
 })
+
+export const purchasedProductSelectorFamily = selectorFamily<any | null, { productId: string; purchaseId: string }>({
+  key: 'purchasedProductSelectorFamily',
+  get: ({ productId, purchaseId }) => ({ get }) => {
+    const product = get(sellerOrderSelectorFamily(productId));
+    if (!product || !Array.isArray(product.purchasedProduct)) return null;
+
+    return product.purchasedProduct.find((product: any) => product._id === purchaseId) || null;
+  },
+});

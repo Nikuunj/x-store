@@ -32,10 +32,12 @@ function EditProductDetail({ btntext, productId }: EditProuctProps) {
 
         if(response?.status === 200) {
             alert(response.data.msg)
+            setOpen(false);
             return
         } else if(response?.status === 401) {
             alert(response.data.msg);
             navigate('../../signin')
+            setOpen(false);
             return
         }
         setOpen(false);
