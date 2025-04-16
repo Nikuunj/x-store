@@ -95,7 +95,7 @@ function ShowDetail({ detail, id }: { detail: string, id: string }) {
     }
     return (
         <>
-            <p className={`text-zinc-300 ${show ? '' : 'truncate'} flex gap-2 -translate-x-2.5`}>
+            <p className={`text-zinc-300 ${show ? '' : 'truncate'} flex gap-2`}>
             <TruckIcon/> {detail}
             </p>
             <div onClick={handleShowdetail} className="z-50 px-3 py-2 inline-block -translate-x-3 text-blue-400 cursor-pointer underline">

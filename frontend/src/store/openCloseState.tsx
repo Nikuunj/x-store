@@ -15,6 +15,11 @@ export const submitAtom = atom<boolean>({
     default: false,
 })
 
+export const editAtom = atom<boolean>({
+    key: 'editAtom',
+    default: false,
+})
+
 export const signOutState = atom<boolean>({
     key: 'signOutState',
     default: false,

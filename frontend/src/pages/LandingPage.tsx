@@ -9,7 +9,7 @@ function LandingPage() {
       <div className={"hidden lg:flex fixed left-22 top-1 rotate-90 mt-27 items-center"}>
         <img className={"min-w-40 w-93  opacity-55 hover:opacity-60 active:opacity-60 duration-300 transition-all"} src={'assets/hero.png'} alt={'img'} />
       </div>
-      <div className={"flex flex-col items-center justify-center sm:relative -top-15 z-20"}>
+      <div className={"flex flex-col items-center justify-center   sm:relative -top-15 z-20"}>
         <div className={"flex flex-col items-center"}>
           <span className={" duration-300 transition-all tracking-tight bg-gradient-to-t ps-3 md:ps-0 from-zinc-800 from-20%  via-zinc-800 via-25% to-purple-600 to-65% inline-block text-transparent bg-clip-text text-7xl sm:text-8xl/tight font-extrabold text-shadow-stone-500"}>X-Store</span>
           <div className={"sm:relative sm:-bottom-20 duration-300 transition-all"}>

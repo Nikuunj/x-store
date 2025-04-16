@@ -193,7 +193,7 @@ const sellerProductDelete = async (req: Request, res: Response) => {
 
         if (result.deletedCount === 0) {
             res.status(404).json({
-                msg: "product not found or already deleted"
+                msg: "product not found or already deleted / plz refresh the page"
             });
             return
         }

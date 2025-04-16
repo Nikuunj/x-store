@@ -26,7 +26,7 @@ function PlaceOrder() {
     const data = useRecoilValueLoadable(productSelectorFamily(productId));
 
     if (data.state === 'loading') {
-        return <>Loading...</>;
+        return <div className={"flex justify-center items-center h-[80vh]"}>Loading...</div>
     }
     
     if (data.state === 'hasError') {
@@ -97,7 +97,7 @@ function PlaceOrder() {
                     <TextBlock variant={'sell'} size={"md"} text={'Submit'} textSize={'sm'} onClick={handleOpen}/>
                 </div>
 
-                <SubmitChecker hadleSubmit={submitFrom} text={"Do You Want to Confim Your Order ?"} />
+                <SubmitChecker hadleSubmit={submitFrom} text={"Do You Want to Confim Your Order ?"} btntext={'Submit'} />
             </div>
         </div>
     )

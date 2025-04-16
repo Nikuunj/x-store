@@ -28,6 +28,10 @@ interface addProductInterface {
     imageLink: string;
 }
 
+interface editProduct extends addProductInterface {
+    productId: string;
+}
+
 export async function signUpSubmitFormUser({ name, email, password }: SignupFromType): Promise<AxiosResponse<any> | undefined> {
     console.log({ name, email, password });
 
@@ -125,6 +129,36 @@ export async function addProduct({ title, price, description, imageLink }: addPr
 
     try {
         const response = await axios.post(`${BACKEND_URL}/seller/product`, {
+            title,
+            description,
+            price,
+            imageLink
+        }, getAuthHeader());
+        return response;
+    } catch (e) {
+        if (axios.isAxiosError(e) && e.response) {
+            return e.response;
+        }
+    }
+}
+
+export async function deleteProduct({ productId }: { productId: string}): Promise<AxiosResponse<any> | undefined> {
+
+    try {
+        const response = await axios.delete(`${BACKEND_URL}/seller/${productId}`, getAuthHeader());
+        return response;
+    } catch (e) {
+        if (axios.isAxiosError(e) && e.response) {
+            return e.response;
+        }
+    }
+}
+
+export async function editProduct({ productId, title, description, price, imageLink }: editProduct): Promise<AxiosResponse<any> | undefined> {
+
+    console.log({ productId, title, description, price, imageLink });
+    try {
+        const response = await axios.put(`${BACKEND_URL}/seller/${productId}`, {
             title,
             description,
             price,

@@ -76,17 +76,21 @@ export const addProductInputRef = [
     {
         types: "text",
         placeHolder: 'product name',
+        defaultVal: "title"
     },
     {
         types: "number",
         placeHolder: 'price',
+        defaultVal: "price"
     },
     {
         types: "text",
         placeHolder: 'description',
+        defaultVal: "description"
     },
     {
         types: "text",
         placeHolder: 'image link',
+        defaultVal: "imageLink"
     },
 ]

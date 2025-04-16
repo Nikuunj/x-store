@@ -4,14 +4,14 @@ import TextBlock from "./TextBlock";
 
 interface SubmitCheckerProps {
     hadleSubmit?: () => void;
-    text: string
+    text: string;
+    btntext: string
 }
 
-function SubmitChecker( { hadleSubmit, text } : SubmitCheckerProps) {
+function SubmitChecker( { hadleSubmit, text, btntext } : SubmitCheckerProps) {
     const [open, setOpen] = useRecoilState(submitAtom);
 
     function handleClose() {
-        console.log('close')
         setOpen(false)
     }
     return (
@@ -22,7 +22,7 @@ function SubmitChecker( { hadleSubmit, text } : SubmitCheckerProps) {
                         {text}
                         <div className="flex justify-center gap-5">
                             <TextBlock onClick={handleClose} variant={'denger'} size={'md'} textSize={'md'} text={'Close'} />
-                            <TextBlock onClick={hadleSubmit ? hadleSubmit : handleClose} variant={'sell'} size={'md'} textSize={'md'} text={'Submit'} />
+                            <TextBlock onClick={hadleSubmit ? hadleSubmit : handleClose} variant={'sell'} size={'md'} textSize={'md'} text={btntext} />
                         </div>
                     </div>
             </div>}

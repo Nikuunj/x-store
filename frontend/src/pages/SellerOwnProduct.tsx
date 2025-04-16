@@ -6,6 +6,7 @@ import SellerSingleOwnProduct from "../components/SellerSingleOwnProduct";
 import SellerSingleOwnProductDetail from "../components/SellerSingleOwnProductDetail";
 // import SellerSingleOwnProduct from "../components/SellerSingleOwnProduct";
 
+
 function SellerOwnProduct() {
   const val = useRecoilValueLoadable(sellerOwnProductIdListSelector);
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function SellerOwnProduct() {
   }, [val.state]);
 
   if (val.state === 'loading') {
-    return <>Loading...</>;
+    return <div className={"flex justify-center items-center h-[80vh]"}>Loading...</div>
   }
 
   if (val.state === "hasError") {

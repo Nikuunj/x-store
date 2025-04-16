@@ -10,7 +10,7 @@ export const userSchema = z.object({
 
 export const productSchema = z.object({
     title: z.string().min(5, { message: "Title is too Short" }),
-    description: z.string().min(20),
+    description: z.string().min(20, { message: "Description is too Short" } ),
     price: z.number().min(2, { message: "Your pass is too short " }),
     imageLink: z.string().url(),
 });
