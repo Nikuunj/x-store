@@ -1,16 +1,17 @@
-import { useRecoilState, useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import { sellerOrderEditAtomFamily } from "../store/openCloseState";
 import { editProdcutInputRef } from "../util/util";
 import InputBox from "./InputBox";
 import { useRef } from "react";
 import TextBlock from "./TextBlock";
-import { purchasedProductSelectorFamily } from "../store/fetchOrderSeller";
+import { purchasedProductSelectorFamily, refetchState } from "../store/fetchOrderSeller";
 import { editOrder } from "../util/submitForm";
 import { useNavigate } from "react-router";
 
 function SellerOrderEdit({ productId, purchaseId }: { productId: string, purchaseId: string}) {
     const [open , setEditOpen] = useRecoilState(sellerOrderEditAtomFamily(purchaseId));
     const data = useRecoilValueLoadable(purchasedProductSelectorFamily({productId, purchaseId}))
+    const triggerReftresh = useSetRecoilState(refetchState);
     const ref = useRef<any>(Array(editProdcutInputRef.length).fill(0));
     const navigate = useNavigate();
 
@@ -48,6 +49,7 @@ function SellerOrderEdit({ productId, purchaseId }: { productId: string, purchas
         if(response?.status === 200) {
             alert(response.data.msg)
             setEditOpen(false);
+            triggerReftresh(pre => !pre);
             return
         } else if(response?.status === 401) {
             alert(response.data.msg);

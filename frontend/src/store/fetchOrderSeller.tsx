@@ -10,7 +10,10 @@ const getAuthHeader = () => ({
 
 const sellerOrderListDefaultSelector = selector<any[]>({
     key: 'sellerOrderListDefaultSelector/Default',
-    get: async () => {
+    get: async ({ get }) => {
+
+      get(refetchState);
+      
       try {
           const res = await fetch(`${BACKEND_URL}/seller/purchase`, getAuthHeader());
     
@@ -26,6 +29,10 @@ const sellerOrderListDefaultSelector = selector<any[]>({
     },
 });
 
+export const refetchState = atom<boolean>({
+  key: 'refetchState',
+  default: false
+})
 export const sellerOrderListState = atom<any[]>({
     key: 'sellerOrderListState',
     default: sellerOrderListDefaultSelector,

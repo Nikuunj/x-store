@@ -2,10 +2,10 @@ import { useRef } from "react";
 import { addProductInputRef } from "../util/util";
 import InputBox from "./InputBox";
 import { editAtom } from "../store/openCloseState";
-import { useRecoilState, useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import TextBlock from "./TextBlock";
 import { editProduct } from "../util/submitForm";
-import { sellerOwnProductSelectorFamily } from "../store/fetchSellerOwnProduct";
+import { refetchState, sellerOwnProductSelectorFamily } from "../store/fetchSellerOwnProduct";
 import { useNavigate } from "react-router";
 
 interface EditProuctProps {
@@ -17,6 +17,7 @@ function EditProductDetail({ btntext, productId }: EditProuctProps) {
     const [open, setOpen] = useRecoilState(editAtom);
     const ref = useRef<any>(Array(addProductInputRef.length).fill(0));
     const data = useRecoilValueLoadable(sellerOwnProductSelectorFamily(productId));
+    const triggerReftresh = useSetRecoilState(refetchState);
     const navigate = useNavigate()
     
 
@@ -32,6 +33,7 @@ function EditProductDetail({ btntext, productId }: EditProuctProps) {
 
         if(response?.status === 200) {
             alert(response.data.msg)
+            triggerReftresh(pre => !pre);
             setOpen(false);
             return
         } else if(response?.status === 401) {

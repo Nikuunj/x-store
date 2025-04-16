@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import { editAtom, sellerOwnOpenAtomFamily, showDetailState, submitAtom } from "../store/openCloseState";
-import { sellerOwnProductSelectorFamily } from "../store/fetchSellerOwnProduct";
+import { refetchState, sellerOwnProductSelectorFamily } from "../store/fetchSellerOwnProduct";
 import { memo } from "react";
 import CloseIcon from "../icons/CloseIcon";
 import BigImage from "./BigImage";
@@ -18,6 +18,7 @@ function SellerSingleOwnDetail({ id }: { id: string }) {
     const data = useRecoilValueLoadable(sellerOwnProductSelectorFamily(id));
     const setEditOpen = useSetRecoilState(editAtom);
     const setDeleteOpen = useSetRecoilState(submitAtom);
+    const triggerReftresh = useSetRecoilState(refetchState);
     const handleClose = () => {
         setOpen(false);
     }
@@ -36,6 +37,7 @@ function SellerSingleOwnDetail({ id }: { id: string }) {
             alert(response.data.msg)
             setDeleteOpen(false)
             setOpen(false);
+            triggerReftresh(pre => !pre);
             return
         } else if(response?.status === 401) {
             navigate('../../signin');

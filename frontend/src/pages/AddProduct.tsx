@@ -4,19 +4,23 @@ import TextBlock from "../components/TextBlock";
 import { addProductInputRef } from "../util/util";
 import { useNavigate } from "react-router";
 import { addProduct } from "../util/submitForm";
+import { refetchState } from "../store/fetchSellerOwnProduct";
+import { useSetRecoilState } from "recoil";
 
 function AddProduct() {
     const ref = useRef<any>(Array(addProductInputRef.length).fill(0));
+    const triggerReftresh = useSetRecoilState(refetchState);
     const navigate = useNavigate();
 
     async function submitAddProductForm() {
         const arr = ref.current.map((input: any) => input?.value)
-           
+        
         const response =  await addProduct({ title: arr[0], price: parseInt(arr[1]), description: arr[2],  imageLink: arr[3] })
         if(response?.status === 200) {
            alert(response.data.msg);
-        navigate('../seller/viewproduct')
-           return
+            navigate('../seller/viewproduct')
+            triggerReftresh(pre => !pre);
+            return
         }
         if(response?.status === 401) {
             navigate('../../signin')
@@ -38,7 +42,6 @@ function AddProduct() {
     ))
 
     return (
-        
         <div className={"h-screen -translate-y-12 grid grid-cols-10"}>
         <div className={"flex flex-col justify-center items-center gap-5 col-span-12 md:col-span-6"}>
             <div className={"flex flex-col gap-5"}>

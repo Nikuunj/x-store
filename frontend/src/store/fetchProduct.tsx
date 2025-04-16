@@ -3,7 +3,9 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const productListDefaultSelector = selector<any[]>({
   key: 'productListState/Default',
-  get: async () => {
+  get: async ({ get }) => {
+  
+    get(refetchState);    
     const res = await fetch(`${BACKEND_URL}/product/0`);
     if (!res.ok) throw new Error('Failed to fetch products');
     const data = await res.json(); // call this ONLY ONCE
@@ -15,6 +17,11 @@ export const productSkipState  = atom<number>({
   key: 'productSkipState',
   default: 0,
 });
+
+export const refetchState = atom<boolean>({
+  key: 'refetchState',
+  default: false
+})
 
 export const productListState = atom<any[]>({
   key: 'productListState',
