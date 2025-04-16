@@ -1,6 +1,6 @@
 
 import { Request, Response } from "express";
-import { userSchema, userSellerSignIn, productSchema } from '../types/validationSchema'
+import { userSchema, userSellerSignIn, productSchema, statusWhereSchema } from '../types/validationSchema'
 import bcrypt from 'bcrypt'
 import { sellerModel, productModel, purchaseModel } from "../db/db";
 import { config } from "../config/config";
@@ -269,12 +269,25 @@ const sellerProductPurchaseGet = async (req: Request, res: Response) => {
 const sellerProductPurchasePut = async (req: Request, res: Response) => {
     const purchaseId = req.params.purchaseId;
 
-    const status = 'recived';
+    const validaton = statusWhereSchema.safeParse(req.body);
+    
+    if(!validaton.success) {
+        if(!validaton.success) {
+            res.status(400).json({
+                message: "Incorrect data format",
+                error: validaton.error,
+            });
+            return
+        }
+    }
+
+    const status = req.body.status;
+    const where = req.body.where;
 
     try {
         const updatedPurchase = await purchaseModel.findOneAndUpdate(
             { _id: purchaseId },
-            { $set: { status } },
+            { $set: { status, where } }, 
         );
     
         if (!updatedPurchase) {

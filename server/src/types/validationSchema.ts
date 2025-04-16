@@ -15,6 +15,11 @@ export const productSchema = z.object({
     imageLink: z.string().url(),
 });
 
+
+export const statusWhereSchema = z.object({
+    status: z.string().min(1, { message: "Status need" }),
+    where: z.string().min(1, { message: "Location address Needed" })
+});
 export const userSellerSignIn = userSchema.pick({ email: true, password: true });
 
 export type userSellerSignInType = z.infer<typeof userSellerSignIn >
