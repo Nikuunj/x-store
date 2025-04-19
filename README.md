@@ -1,7 +1,7 @@
 
 # 🛍️ X-Store
 
-**X-Store** is a full-stack e-commerce web application that provides a seamless shopping experience with a clean UI and responsive design. The app is built using React (frontend) and Express.js (backend), connected with a MySQL database.
+**X-Store** is a full-stack e-commerce web application that provides a seamless shopping experience with a clean UI and responsive design. The app is built using React (frontend) and Express.js (backend), connected with a mongoDb database.
 
 ![X-Wallet Banner](/public/image.png)
 
@@ -15,7 +15,7 @@
 ## ⚙️ Tech Stack
 
 - **Frontend**: React, TypeScript, Vite, Tailwind CSS
-- **Backend**: Node.js, Express, MySQL
+- **Backend**: Node.js, Express, mongoDb
 - **Other Tools**: Axios, dotenv, ESLint, Vercel
 
 ---
@@ -36,7 +36,7 @@
 x-store/
 ├── frontend/        # React + Vite client
 │   ├── .env         # Frontend environment variables
-├── server/          # Express + MySQL backend
+├── server/          # Express + mongoDb backend
 │   ├── .env         # Backend environment variables
 └── public/          # Shared static assets
 ```
@@ -102,7 +102,7 @@ PRODUCTION=development
 SESSION_SECRET=
 ```
 
-> Ensure your MySQL database is running and credentials are correct.
+> Ensure your mongoDB database is running and credentials are correct.
 
 ---
 
